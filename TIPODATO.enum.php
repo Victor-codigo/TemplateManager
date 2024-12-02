@@ -11,19 +11,19 @@ use GT\Libs\Sistema\Tipos\Enum;
 final class TIPODATO extends Enum
 {
     /**
-     * Información escapapada del código HTML
+     * Información escapada del código HTML
      * @var int
      */
     const DATA = 1;
 
     /**
-     * URL escapapada del código HTML
+     * URL escapada del código HTML
      * @var int
      */
     const URL = 2;
 
     /**
-     * Código JSON escapapada del código HTML
+     * Código JSON escapada del código HTML
      * @var int
      */
     const JSON = 4;

@@ -65,7 +65,7 @@ class GestorPlantillas
 
     /**
      * Información guardada para las plantillas, con el siguiente formato:
-     *  - arr[identificador de la ingformación] = PlantillaData, información
+     *  - arr[identificador de la información] = PlantillaData, información
      * @var PlantillaData[]
      */
     private $plantillas_data = array();
@@ -74,7 +74,7 @@ class GestorPlantillas
          * Obtiene la información cargada para una plantilla
          * a partir del identificador de información
          *
-         * @param string $id identificdaor de la información
+         * @param string $id identificador de la información
          *
          * @return PlantillaData|PlantillaData[]|NULL Si se pasa $id:
             *                                              - Si se encuentra PlantillaData
@@ -105,7 +105,7 @@ class GestorPlantillas
          * Establece la información para una plantilla con el identificador de
          * información
          *
-         * @param string $id identificdaor de la información
+         * @param string $id identificador de la información
          * @param PlantillaData $data información de la plantilla
          */
         public function setData($id, PlantillaData $data)
