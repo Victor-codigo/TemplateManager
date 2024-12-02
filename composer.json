@@ -10,7 +10,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Lib\\": "."
+            "Lib\\": "src/",
+            "Tests\\": "tests/"
         }
     },
     "require-dev": {
