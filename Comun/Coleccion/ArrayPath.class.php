@@ -1,8 +1,7 @@
 <?php
 
 
-namespace GT\Libs\Sistema\Tipos;
-//******************************************************************************
+namespace Lib\Comun\Coleccion;
 
 /**
  * Array al que se le pueden modificar los items a través de un path
@@ -17,8 +16,8 @@ class ArrayPath extends ArrayBase
      * @version 1.0
      *
      * @param string $path path de la ruta
-     * @param boolean $encontrado [OUT] TRUE si se encuentra, FLASE si no se encuentra
-     * @param string $separator separador que se unsa para crear la ruta
+     * @param boolean $encontrado [OUT] TRUE si se encuentra, FALSE si no se encuentra
+     * @param string $separator separador que se usa para crear la ruta
      *
      * @return mixed|NULL valor
      *                    NULL si no se encuentra
@@ -27,17 +26,16 @@ class ArrayPath extends ArrayBase
     {
         return $this->getPointer($path, $encontrado, $separator);
     }
-//******************************************************************************
 
 
     /**
-     * Crea una ruta. Si la ruta ya existe la sobreescribe
+     * Crea una ruta. Si la ruta ya existe la sobre escribe
      *
      * @version 1.0
      *
      * @param string $path path de la ruta
      * @param mixed $value valor que se guarda en la ruta
-     * @param string $separator separador que se unsa para crear la ruta
+     * @param string $separator separador que se usa para crear la ruta
      *
      * @return boolean TRUE si se creó con éxito,
      *                 FALSE si no se creó
@@ -72,7 +70,6 @@ class ArrayPath extends ArrayBase
 
         return true;
     }
-//******************************************************************************
 
     /**
      * Comprueba si un path existe
@@ -92,7 +89,6 @@ class ArrayPath extends ArrayBase
 
         return $encontrado;
     }
-//******************************************************************************
 
 
     /**
@@ -136,7 +132,6 @@ class ArrayPath extends ArrayBase
 
         return true;
     }
-//******************************************************************************
 
     /**
      * Busca un path y devuelve su una referencia al valor
@@ -144,7 +139,7 @@ class ArrayPath extends ArrayBase
      * @version 1.0
      *
      * @param string $path
-     * @param boolean $encontrado [OUT] TRUE si se encuentra, FLASE si no se encuentra
+     * @param boolean $encontrado [OUT] TRUE si se encuentra, FALSE si no se encuentra
      *
      * @return Resource|NULL NULL si no se encuentra
      */
@@ -174,6 +169,4 @@ class ArrayPath extends ArrayBase
 
         return $retorno_null;
     }
-//******************************************************************************
 }
-//******************************************************************************

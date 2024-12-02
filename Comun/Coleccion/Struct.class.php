@@ -1,9 +1,8 @@
 <?php
 
-namespace GT\Libs\Sistema\Tipos;
+namespace Lib\Comun\Coleccion;
 
 use Serializable;
-//******************************************************************************
 
 
 class Struct implements Serializable
@@ -23,7 +22,6 @@ class Struct implements Serializable
             }
         }
     }
-//******************************************************************************
 
 
 
@@ -50,7 +48,6 @@ class Struct implements Serializable
             }
         }
     }
-//******************************************************************************
 
 
     /**
@@ -68,13 +65,12 @@ class Struct implements Serializable
     {
         return $this->fromArray($struct->toArray(0));
     }
-//******************************************************************************
 
 
     /**
      * Guarda las propiedades en un array
      *
-     * @vesion 1.0
+     * @version 1.0
      *
      * @param int $niveles Número de niveles de anidación que alcanza la función
      *                      a la hora de convertir en array.
@@ -101,7 +97,6 @@ class Struct implements Serializable
 
         return $propiedades;
     }
-//******************************************************************************
 
 
 
@@ -111,7 +106,7 @@ class Struct implements Serializable
      *
      * @version 1.0
      *
-     * @param mixed $valor valor que se estabelce para todos las propiedades
+     * @param mixed $valor valor que se establece para todos las propiedades
      */
     public function setPropiedadesValor($valor)
     {
@@ -120,7 +115,6 @@ class Struct implements Serializable
             $this->$propiedad = $valor;
         }
     }
-//******************************************************************************
 
 
     /**
@@ -134,18 +128,17 @@ class Struct implements Serializable
     {
         return count(get_object_vars($this));
     }
-//******************************************************************************
 
 
     /**
-     * Debuelve todas las propiedades de la estructura, que no contengan el valor
+     * Devuelve todas las propiedades de la estructura, que no contengan el valor
      * pasado
      *
      * @version 1.0
      *
      * @param mixed $valor no devover propiedades con el valor pasado. Si son objetos se
      *                      compara el tipo de objeto
-     * @param boolean $strict TRUE si la comparación es estructa, FALSE no
+     * @param boolean $strict TRUE si la comparación es estricta, FALSE no
      *
      * @return array con las propiedades de la estructura que no contengan el valor pasado,
      *              con el siguiente formato:
@@ -194,10 +187,9 @@ class Struct implements Serializable
 
         return $retorno;
     }
-//******************************************************************************
 
     /**
-     * Debuelve todas las propiedades de la estructura
+     * Devuelve todas las propiedades de la estructura
      *
      * @version 1.0
      *
@@ -214,11 +206,10 @@ class Struct implements Serializable
 
         return $retorno;
     }
-//******************************************************************************
 
 
     /**
-     * Debuelve todos los valores de la estructura
+     * Devuelve todos los valores de la estructura
      *
      * @version 1.0
      *
@@ -235,7 +226,6 @@ class Struct implements Serializable
 
         return $retorno;
     }
-//******************************************************************************
 
 
     /**
@@ -264,7 +254,6 @@ class Struct implements Serializable
 
         return $retorno;
     }
-//******************************************************************************
 
 
     /**
@@ -289,7 +278,6 @@ class Struct implements Serializable
 
         return $retorno;
     }
-//******************************************************************************
 
     /**
      * obtiene el número de propiedades que contiene la estructura
@@ -302,12 +290,11 @@ class Struct implements Serializable
     {
         return count(get_object_vars($this));
     }
-//******************************************************************************
 
     /**
      * Serializa la estructura
      * Solo se serializa las propiedades escalares, loa arrays y los valores null.
-     * Serializa objetos, si estos implementoan la interface \Serializable o
+     * Serializa objetos, si estos implementan la interface \Serializable o
      * los métodos __sleep y __wakeup
      *
      * @version 1.0
@@ -336,13 +323,12 @@ class Struct implements Serializable
 
         return serialize($serializar);
     }
-//******************************************************************************
 
 
     /**
      * Desserializa la estructura
      * Solo se desserializa las propiedades escalares, loa arrays y los valores null.
-     * Desserializa objetos, si estos implementoan la interface \Serializable o
+     * Desserializa objetos, si estos implementan la interface \Serializable o
      * los métodos __sleep y __wakeup
      *
      * @version 1.0
@@ -381,5 +367,4 @@ class Struct implements Serializable
 
         return $retorno;
     }
-//******************************************************************************
 }

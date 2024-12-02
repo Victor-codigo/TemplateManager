@@ -1,9 +1,9 @@
 <?php
 
-namespace GT\Libs\Sistema\Plantilla;
+namespace Lib;
 
-use GT\Libs\Sistema\Tipos\Struct;
-//******************************************************************************
+use Lib\Comun\Coleccion\Struct;
+
 
 
 /**
@@ -13,14 +13,11 @@ final class PlantillaConfig extends Struct
 {
     /**
      * Path de la plantilla HTML
-     * @var string
      */
-    public $path = '';
+    public string  $path = '';
 
     /**
-     * Raiz del path de idioma
-     * @var string
+     * Raíz del path de idioma
      */
-    public $lang_raiz = '';
+    public string  $langRaiz = '';
 }
-//******************************************************************************

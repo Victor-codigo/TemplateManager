@@ -1,8 +1,9 @@
 <?php
 
-namespace GT\Libs\Sistema\Plantilla;
-use GT\Libs\Sistema\Tipos\Enum;
-//******************************************************************************
+namespace Lib;
+
+use Lib\Comun\Enum;
+
 
 /**
  * Tipos de each que se pueden usar para la función Plantilla::each

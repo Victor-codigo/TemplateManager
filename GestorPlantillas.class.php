@@ -1,21 +1,9 @@
 <?php
 
-namespace GT\Libs\Sistema\Plantilla;
+namespace Lib;
 
-use Exception;
-use GT\Libs\Sistema\Lang;
-//******************************************************************************
-
-
-if(!class_exists(ExceptionDataCargar::class, false))
-{
-    /**
-     * Excepción, no se ha podido cargar la información de la plantilla
-     */
-    class ExceptionDataCargar extends Exception {}
-    //******************************************************************************
-}
-
+use Lib\Comun\Lang;
+use Lib\Exception\ExceptionDataCargar;
 
 class GestorPlantillas
 {
@@ -60,7 +48,6 @@ class GestorPlantillas
 
             return $retorno;
         }
-//******************************************************************************
 
 
     /**
@@ -112,7 +99,6 @@ class GestorPlantillas
         {
             $this->plantillas_data[$id] = $data;
         }
-//******************************************************************************
 
 
     /**
@@ -122,7 +108,7 @@ class GestorPlantillas
     private $lang = null;
 
         /**
-         * Obitiene la clase de idioma
+         * Obtiene la clase de idioma
          *
          * @version 1.0
          *
@@ -144,7 +130,6 @@ class GestorPlantillas
         {
             $this->lang = $lang;
         }
-//******************************************************************************
 
 
     /**
@@ -156,7 +141,6 @@ class GestorPlantillas
     {
         $this->setLang($lang);
     }
-//******************************************************************************
 
     /**
      * Destructor
@@ -177,7 +161,6 @@ class GestorPlantillas
             $data = null;
         }
     }
-//******************************************************************************
 
 
     /**
@@ -200,7 +183,6 @@ class GestorPlantillas
 
         return $plantilla;
     }
-//******************************************************************************
 
 
     /**
@@ -208,7 +190,7 @@ class GestorPlantillas
      *
      * @version 1.1
      *
-     * @throws ExceptionDataCargar Si no se encuentra el identificdaor de la información pasada
+     * @throws ExceptionDataCargar Si no se encuentra el identificador de la información pasada
      *
      * @param string|PlantillaData $data Identificador de la información de la plantilla.
      *                                      Objeto con la Información de la plantilla
@@ -233,10 +215,9 @@ class GestorPlantillas
 
         $plantilla_config = new PlantillaConfig();
         $plantilla_config->path = $data::PATH;
-        $plantilla_config->lang_raiz = $data::LANG_RAIZ;
+        $plantilla_config->langRaiz = $data::LANG_RAIZ;
 
         return $this->cargarPlantilla($plantilla_config)
                     ->render($data, $string);
     }
-//******************************************************************************
 }

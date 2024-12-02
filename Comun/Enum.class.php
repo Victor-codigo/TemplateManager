@@ -1,25 +1,14 @@
 <?php
 
-namespace GT\Libs\Sistema\Tipos;
+namespace Lib\Comun;
 
 use ReflectionClass;
-//******************************************************************************
 
 /**
  * Permite crear enumeraciones
  */
 abstract class Enum
 {
-    /**
-     * Constructor
-     *
-     * @version 1.0
-     */
-    protected function __construct()
-    {
-
-    }
-//******************************************************************************
 
     /**
      * Crea la reflexión de la enumeración
@@ -32,7 +21,6 @@ abstract class Enum
     {
         return new ReflectionClass(get_called_class());
     }
-//******************************************************************************
 
 
     /**
@@ -48,7 +36,6 @@ abstract class Enum
     {
         return self::getReflexion()->getConstants();
     }
-//******************************************************************************
 
     /**
      * Obtiene el nombre de las constantes
@@ -61,11 +48,10 @@ abstract class Enum
     {
         return array_keys(self::getConstants());
     }
-//******************************************************************************
 
 
     /**
-     * Comprueba si la emuneración tiene una constante con el nombre pasado
+     * Comprueba si la enumeración tiene una constante con el nombre pasado
      *
      * @version 1.0
      *
@@ -84,11 +70,10 @@ abstract class Enum
 
         return $retorno;
     }
-//******************************************************************************
 
 
     /**
-     * Comprueba si la emuneración tiene una constante con el valor pasado
+     * Comprueba si la enumeración tiene una constante con el valor pasado
      *
      * @version 1.0
      *
@@ -114,5 +99,4 @@ abstract class Enum
 
         return false;
     }
-//******************************************************************************
 }

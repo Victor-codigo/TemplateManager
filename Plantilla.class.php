@@ -1,35 +1,17 @@
 <?php
 
-namespace GT\Libs\Sistema\Plantilla;
-use GT\Libs\Sistema\Call;
-//******************************************************************************
+declare(strict_types=1);
 
-/**
- * Excepción, no se ha encontrado la plantilla
- */
-class ExceptionPlantillaNoEncontrada extends \Exception {}
-//******************************************************************************
+namespace Lib;
 
-/**
- * Excepción, no se ha podido cargar la plantilla
- */
-class ExceptionPlantillaCargar extends \Exception {}
-//******************************************************************************
-
-if(!class_exists(ExceptionDataCargar::class, false))
-{
-    /**
-     * Excepción, no se ha podido cargar la información de la plantilla
-     */
-    class ExceptionDataCargar extends \Exception {}
-    //******************************************************************************
-}
-
+use Lib\Comun\Call;
+use Lib\Exception\ExceptionDataCargar;
+use Lib\Exception\ExceptionPlantillaCargar;
+use Lib\Exception\ExceptionPlantillaNoEncontrada;
 
 class Plantilla
 {
     use Call;
-//******************************************************************************
 
 
     /**
@@ -44,15 +26,14 @@ class Plantilla
      * Codificación de la web
      * @var string
      */
-    const CODIFICACION = CODIFICACION_TEXTO_WEB;
+    const CODIFICACION = 'UTF-8';
 
     /**
      * CONSTANTE
-     * Caractesr separador de las URLs. Se utiliza para la furnción url
+     * Características separador de las URLs. Se utiliza para la función url
      * @var string
      */
     const URL_SECCION_SEPARADOR = '/';
-//******************************************************************************
 
 
 
@@ -96,6 +77,7 @@ class Plantilla
         {
             if(is_readable($path))
             {
+
                 $this->path = $path;
             }
             else
@@ -103,43 +85,40 @@ class Plantilla
                 throw new ExceptionPlantillaNoEncontrada($path);
             }
         }
-//******************************************************************************
 
     /**
      * Raíz del path de idioma
      * @var string
      */
-    private $lang_raiz = '';
+    private $langRaiz = '';
 
         /**
-         * Establece la raiz del path de idioma
+         * Establece la raíz del path de idioma
          *
          * @version 1.0
          *
-         * @param string $lang_raiz raiz del path de idioma
+         * @param string $langRaiz raíz del path de idioma
          */
-        public function setLangRaiz($lang_raiz)
+        public function setLangRaiz($langRaiz)
         {
-            $this->lang_raiz = $lang_raiz;
+            $this->langRaiz = $langRaiz;
         }
-//******************************************************************************
 
         /**
-         * Obtiene la raiz del path de idioma
+         * Obtiene la raíz del path de idioma
          *
          * @version 1.0
          */
         public function getLangRaiz()
         {
-            return $this->lang_raiz;
+            return $this->langRaiz;
         }
-//******************************************************************************
 
     /**
      * Callback de la plantilla
      * con el siguiente formato:
      * Parámetros:
-     *  - PlantillaData, información que se lepasa a la estructura
+     *  - PlantillaData, información que se l pasa a la estructura
      *  - Plantilla, plantilla
      *
      * @var callable
@@ -153,14 +132,13 @@ class Plantilla
          *
          * @return callable callback con el siguiente formato:
          *                  Parámetros:
-         *                      - PlantillaData, información que se lepasa a la estructura
+         *                      - PlantillaData, información que se le pasa a la estructura
          *                      - Plantilla, plantilla
          */
         public function getCallback()
         {
             return $this->callback;
         }
-//******************************************************************************
 
 
 
@@ -178,10 +156,9 @@ class Plantilla
     {
         $this->gestor = $gestor;
         $this->setPath($config->path);
-        $this->setLangRaiz($config->lang_raiz);
+        $this->setLangRaiz($config->langRaiz);
         $this->cargar($config->path);
     }
-//******************************************************************************
 
 
     /**
@@ -194,7 +171,6 @@ class Plantilla
         $this->gestor = null;
         $this->callback = null;
     }
-//******************************************************************************
 
 
 
@@ -227,7 +203,6 @@ class Plantilla
             throw new ExceptionPlantillaCargar('No se puede cargar la plantilla: ' . $path);
         }
     }
-//******************************************************************************
 
 
     /**
@@ -242,7 +217,7 @@ class Plantilla
      * @return boolean|string - Si $string es TRUE:
      *                              string con el código de la plantilla
      *                          - Si $string es FALSE:
-     *                              TRUE si se ejecura correctamente.
+     *                              TRUE si se ejecuta correctamente.
      *                              FALSE si se produce un error
      */
     public function render($data, $string = false)
@@ -264,7 +239,6 @@ class Plantilla
 
         return $string ? ob_get_clean() : ob_end_flush();
     }
-//******************************************************************************
 
 
     /**
@@ -283,7 +257,6 @@ class Plantilla
     {
         return $this->gestor->renderPlantilla($data, $string);
     }
-//******************************************************************************
 
     /**
      * Comprueba si existe una PlantillaData en el gestor de plantillas
@@ -298,7 +271,6 @@ class Plantilla
     {
         return $this->gestor->getData($id)===null ? false : true;
     }
-//******************************************************************************
 
 
 
@@ -308,7 +280,7 @@ class Plantilla
      *
      * @version 1.0
      *
-     * @param stirng $path path de la variable
+     * @param string $path path de la variable
      * @param type $sustitucion con los place-holders a sustituir. Con el siguiente formato:     
      *                          - arr[place-holder sin marcador] = string, reemplazo
      * @param string $marca caracteres que se utilizan para marcar el place-holder
@@ -328,7 +300,6 @@ class Plantilla
 
         return $this->data($valor, $string);
     }
-//******************************************************************************
 
     /**
      * Carga en la plantilla una variable de idioma.
@@ -336,8 +307,8 @@ class Plantilla
      *
      * @version 1.0
      *
-     * @param stirng $path path de la variable
-     * @param type $sustitucion con los place-holders a sustituir. Con el siguiente formato:     
+     * @param string $path path de la variable
+     * @param array<string, string> $sustitucion con los place-holders a sustituir. Con el siguiente formato:     
      *                          - arr[place-holder sin marcador] = string, reemplazo
      * @param string $marca caracteres que se utilizan para marcar el place-holder
      * @param boolean $string TRUE si devuelve un string
@@ -345,7 +316,7 @@ class Plantilla
      *
      * @return string con los valores escapados
      */
-    public function langHtml($path, $sustitucion = [], $marca = ':', $string = false)
+    public function langHtml($path,array $sustitucion = [], $marca = ':', $string = false)
     {
         $lang = $this->gestor->getLang();
         $valor = $lang->get(
@@ -372,7 +343,6 @@ class Plantilla
 
         echo $texto_escapado;
     }
-//******************************************************************************
 
 
 
@@ -404,7 +374,6 @@ class Plantilla
 
         echo $data;
     }
-//******************************************************************************
 
 
 
@@ -416,16 +385,16 @@ class Plantilla
      * @param string $url URL a escapar
      * @param array $sustitucion caracteres que se sustituyen en cada una de las partes
      *                              de la URL, con el siguiente formato:
-     *                                  - arr[caracter a sustituir] = string, caracter sustituido
-     * @param string $seccion_separador caracter separador de las secciones de la URL
+     *                                  - arr[carácter a sustituir] = string, carácter sustituido
+     * @param string $seccionSeparador carácter separador de las secciones de la URL
      * @param boolean $string TRUE si devuelve un string
      *                        FALSE si se muestra por pantalla
      *
      * @return string URL saneada
      */
-    public function url($url, array $sustitucion = [' ' => '-'], $seccion_separador = self::URL_SECCION_SEPARADOR, $string = false)
+    public function url($url, array $sustitucion = [' ' => '-'], $seccionSeparador = self::URL_SECCION_SEPARADOR, $string = false)
     {
-        $url_trozos = explode($seccion_separador, trim($url));
+        $url_trozos = explode($seccionSeparador, trim($url));
         $sustituido = array_keys($sustitucion);
 
         for($i = 0, $length = count($url_trozos); $i<$length; $i++)
@@ -440,14 +409,13 @@ class Plantilla
 
         return $this->data(
 
-            $this->urlEspaceHttpYSharp(implode($seccion_separador, $url_trozos)),
+            $this->urlEspaceHttpYSharp(implode($seccionSeparador, $url_trozos)),
             $string
         );
     }
-//******************************************************************************
 
     /**
-     * Corrige el error de escape del prodocolo HTTP|HTTPS y del #
+     * Corrige el error de escape del protocolo HTTP|HTTPS y del #
      *
      * @version 1.0
      *
@@ -479,7 +447,6 @@ class Plantilla
 
         return $url;
     }
-//******************************************************************************
 
 
 
@@ -513,7 +480,6 @@ class Plantilla
 
         echo $retorno;
     }
-//******************************************************************************
 
 
     /**
@@ -564,7 +530,6 @@ class Plantilla
 
         echo $retorno;
     }
-//******************************************************************************
 
 
 
@@ -574,9 +539,9 @@ class Plantilla
      *
      * @version 1.0
      *
-     * @param array $array con los elemnetos
+     * @param array $array con los elementos
      * @param EACH $modo establece el modo en el que se concatenen los elementos
-     * @param string $separador strig con el que se separan los ementos
+     * @param string $separador string con el que se separan los elementos
      * @param boolean $string TRUE si devuelve un string
      *                        FALSE si se muestra por pantalla
      *
@@ -618,5 +583,4 @@ class Plantilla
 
         echo $retorno;
     }
-//******************************************************************************
 }

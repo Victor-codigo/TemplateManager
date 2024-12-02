@@ -1,10 +1,10 @@
 <?php
 
+namespace Lib\Comun\Coleccion;
 
 use Countable;
 use Iterator;
 use JsonSerializable;
-//******************************************************************************
 
 /**
  * Crea una clase base para extender la funcionalidad del array
@@ -16,7 +16,6 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
      * @var array
      */
     protected $array = array();
-//******************************************************************************
 
 
     /**
@@ -30,7 +29,6 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
     {
         $this->array = $items;
     }
-//******************************************************************************
 
     /**
      * Destructor
@@ -41,7 +39,6 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
     {
         $this->clear();
     }
-//******************************************************************************
 
 
     /**
@@ -51,11 +48,10 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
      *
      * @return int
      */
-    public function count()
+    public function count():int
     {
         return count($this->array);
     }
-//******************************************************************************
 
 
     /**
@@ -66,11 +62,10 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
      * @return mixed|FALSE valor
      *                     FALSE si está vacío o ha alcanzado el final
      */
-    public function current()
+    public function current():mixed
     {
         return current($this->array);
     }
-//******************************************************************************
 
 
     /**
@@ -81,11 +76,10 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
      * @return int|NULL indice actual
      *                  NULL si está vacío o ha alcanzado el final
      */
-    public function key()
+    public function key():mixed
     {
         return key($this->array);
     }
-//******************************************************************************
 
 
     /**
@@ -93,11 +87,10 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
      *
      * @version 1.0
      */
-    public function next()
+    public function next():void
     {
         next($this->array);
     }
-//******************************************************************************
 
 
     /**
@@ -105,11 +98,10 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
      *
      * @version 1.0
      */
-    public function rewind()
+    public function rewind():void
     {
         reset($this->array);
     }
-//******************************************************************************
 
 
     /**
@@ -117,14 +109,13 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
      *
      * @version 1.0
      *
-     * @return boolean TRUE si el indice interno es valildo
+     * @return boolean TRUE si el indice interno es válido
      *                  FALSE si no lo es
      */
-    public function valid()
+    public function valid():bool
     {
         return current($this->array)===false ? false : true;
     }
-//******************************************************************************
 
     /**
      * Elimina todos los items
@@ -140,7 +131,6 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
 
         $this->array = array();
     }
-//******************************************************************************
 
     /**
      * Comprueba si está vacío
@@ -154,7 +144,6 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
     {
         return empty($this->array);
     }
-//******************************************************************************
 
     /**
      * Obtiene el array
@@ -167,7 +156,6 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
     {
         return $this->array;
     }
-//******************************************************************************
 
     /**
      * Obtiene la referencia al array el array
@@ -180,7 +168,6 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
     {
         return $this->array;
     }
-//******************************************************************************
 
     /**
      * Añade un elemento al final del array
@@ -201,7 +188,6 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
 
         $this->array[] = $item;
     }
-//******************************************************************************
 
     /**
      * Crea un clon de la clase
@@ -214,7 +200,6 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
     {
         return clone $this;
     }
-//******************************************************************************
 
     /**
      * Carga los datos desde un array
@@ -235,7 +220,6 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
             $this->push($item, $id);
         }
     }
-//******************************************************************************
 
 
     /**
@@ -249,7 +233,6 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
     {
         $this->array =& $array;
     }
-//******************************************************************************
 
 
     /**
@@ -273,7 +256,6 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
 
         return $retorno;
     }
-//******************************************************************************
 
     /**
      * Obtiene los elementos del array serializados en formato JSON
@@ -283,10 +265,8 @@ abstract class ArrayBase implements Iterator, Countable, JsonSerializable
      * @return string|FALSE array en JSON
      *                      FALSE Si se produce un error
      */
-    public function jsonSerialize()
+    public function jsonSerialize():mixed
     {
         return json_encode($this->array);
     }
-//******************************************************************************
 }
-//******************************************************************************

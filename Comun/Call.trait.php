@@ -1,8 +1,8 @@
 <?php
 
-namespace GT\Libs\Sistema;
+namespace Lib\Comun;
+
 use Exception;
-//******************************************************************************
 
 /**
  * Añade la función __call a la clase, que permite llamar a funciones
@@ -36,5 +36,4 @@ trait Call
 
         return $retorno;
     }
-//******************************************************************************
 }
