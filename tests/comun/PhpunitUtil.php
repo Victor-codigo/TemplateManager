@@ -359,7 +359,7 @@ trait PhpunitUtil
      *
      * @return array todo el trazado o parte del trazado
      */
-    public static function getCallerInfo($indice = null)
+    public static function getCallerInfo($indice = null): array
     {
         $trazado = debug_backtrace();
 
