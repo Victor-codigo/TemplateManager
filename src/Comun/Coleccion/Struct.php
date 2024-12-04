@@ -105,7 +105,7 @@ class Struct implements \Serializable
      *
      * @return int número de propiedades
      */
-    public function length()
+    public function length(): int
     {
         return count(get_object_vars($this));
     }
@@ -219,10 +219,8 @@ class Struct implements \Serializable
      * obtiene el número de propiedades que contiene la estructura.
      *
      * @version 1.0
-     *
-     * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count(get_object_vars($this));
     }
