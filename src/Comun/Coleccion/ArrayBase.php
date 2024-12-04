@@ -110,7 +110,7 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      *
      * @version 1.0
      */
-    public function clear()
+    public function clear(): void
     {
         foreach ($this->items as &$item) {
             $item = null;
@@ -164,7 +164,7 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      * @param mixed $item elemento que se añade
      * @param int|string|null $id identificador del elemento
      */
-    public function push(mixed $item, $id = null)
+    public function push(mixed $item, $id = null): void
     {
         if (is_string($id) || is_numeric($id)) {
             $this->items[$id] = $item;
@@ -196,7 +196,7 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      * @param bool  $set_keys TRUE si se añaden los identificadores de los items
      *                        FALSE no se añaden
      */
-    public function fillFromArray(array $array, $set_keys = true)
+    public function fillFromArray(array $array, $set_keys = true): void
     {
         $this->clear();
 
@@ -213,7 +213,7 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      *
      * @param array $array del que se copia la referencia
      */
-    public function fillFromArrayRef(array &$array)
+    public function fillFromArrayRef(array &$array): void
     {
         $this->items = &$array;
     }

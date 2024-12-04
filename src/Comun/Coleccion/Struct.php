@@ -31,7 +31,7 @@ class Struct implements \Serializable
      *                     FALSE se omiten los elementos del array cuyo indice no coincida
      *                     con el de una propiedad de la estructura
      */
-    public function fromArray(array $array, $crear = false)
+    public function fromArray(array $array, $crear = false): void
     {
         $propiedades = get_object_vars($this);
 
@@ -93,7 +93,7 @@ class Struct implements \Serializable
      *
      * @param mixed $valor valor que se establece para todos las propiedades
      */
-    public function setPropiedadesValor(mixed $valor)
+    public function setPropiedadesValor(mixed $valor): void
     {
         foreach (array_keys(get_object_vars($this)) as $propiedad) {
             $this->$propiedad = $valor;

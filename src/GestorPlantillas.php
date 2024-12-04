@@ -88,7 +88,7 @@ class GestorPlantillas
      * @param string        $id   identificador de la información
      * @param PlantillaData $data información de la plantilla
      */
-    public function setData($id, PlantillaData $data)
+    public function setData($id, PlantillaData $data): void
     {
         $this->plantillas_data[$id] = $data;
     }
@@ -119,7 +119,7 @@ class GestorPlantillas
      *
      * @param Lang $lang
      */
-    public function setLang($lang)
+    public function setLang($lang): void
     {
         $this->lang = $lang;
     }

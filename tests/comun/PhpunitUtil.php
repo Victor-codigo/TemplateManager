@@ -297,7 +297,7 @@ trait PhpunitUtil
      * @param object $object  mock del objeto
      * @param Stub[] $methods stubs que se crean
      */
-    public function setMockMethods($object, array $methods)
+    public function setMockMethods($object, array $methods): void
     {
         foreach ($methods as $method) {
             $this->setMockMethod($object, $method);
@@ -376,7 +376,7 @@ trait PhpunitUtil
      * @param array  $array    array de objetos
      * @param string $mensaje  mensaje de error
      */
-    public function assertArrayObjectHasAttribute($atributo, array $array, $mensaje = '')
+    public function assertArrayObjectHasAttribute($atributo, array $array, $mensaje = ''): void
     {
         foreach ($array as $indice => $objeto) {
             $this->assertObjectHasAttribute(
@@ -398,7 +398,7 @@ trait PhpunitUtil
      * @param object $objeto   objeto que se comprueba
      * @param string $mensaje  mensaje de error
      */
-    public function assertObjectAttributeValue($atributo, mixed $valor, $objeto, $mensaje = '')
+    public function assertObjectAttributeValue($atributo, mixed $valor, $objeto, $mensaje = ''): void
     {
         $this->assertObjectHasAttribute(
             $atributo,
@@ -422,7 +422,7 @@ trait PhpunitUtil
      * @param array  $array    array a comprobar
      * @param string $mensaje  mensaje de error
      */
-    public function assertArrayInstancesOf($expected, array $array, $mensaje = '')
+    public function assertArrayInstancesOf($expected, array $array, $mensaje = ''): void
     {
         foreach ($array as $indice => $objeto) {
             $this->assertInstanceOf(
@@ -442,7 +442,7 @@ trait PhpunitUtil
      * @param mixed  $object   objeto que se comprueba
      * @param string $mensaje  mensaje de error
      */
-    public function assertArrayHasInstanceOf(array $expected, mixed $object, $mensaje = '')
+    public function assertArrayHasInstanceOf(array $expected, mixed $object, $mensaje = ''): void
     {
         $assert_ok = false;
         foreach ($expected as $instancia) {

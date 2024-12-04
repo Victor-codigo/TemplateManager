@@ -34,7 +34,7 @@ class Lang
      *
      * @param type $path
      */
-    public function setLangPath($path)
+    public function setLangPath($path): void
     {
         $this->lang_path = $path;
     }
@@ -71,7 +71,7 @@ class Lang
      *                     relativo al la carpeta donde se
      *                     guardan los idiomas
      */
-    public function setLangs(array $langs)
+    public function setLangs(array $langs): void
     {
         $this->langs = $langs;
     }
@@ -105,7 +105,7 @@ class Lang
      *
      * @param int|string $lang identificador del idioma a cargar
      */
-    public function setLang($lang)
+    public function setLang($lang): void
     {
         if (array_key_exists($lang, $this->langs)) {
             $this->lang = $lang;
@@ -140,7 +140,7 @@ class Lang
      *
      * @param int|string $lang
      */
-    public function setLangDefault($lang)
+    public function setLangDefault($lang): void
     {
         $this->lang_default = $lang;
     }
@@ -200,7 +200,7 @@ class Lang
      *
      * @throws \Exception
      */
-    public function cargar($path, $path_var = null, $separador = self::SEPARADOR)
+    public function cargar($path, $path_var = null, $separador = self::SEPARADOR): void
     {
         $path_var ??= str_replace(['\\', '/'], $separador, $path);
 
@@ -267,7 +267,7 @@ class Lang
      * @param string|string[] $vars  variables que se guardan
      * @param string          $marca carácter que separa los niveles del path
      */
-    public function set($path, $vars, $marca = self::SEPARADOR)
+    public function set($path, $vars, $marca = self::SEPARADOR): void
     {
         $this->lang_vars->setPath($path, $vars, $marca);
     }
@@ -324,7 +324,7 @@ class Lang
      * @param string $path_destino path de destino
      * @param string $marca        carácter que separa los niveles del path
      */
-    public function move($path_origen, $path_destino, $marca = self::SEPARADOR)
+    public function move($path_origen, $path_destino, $marca = self::SEPARADOR): void
     {
         if ($this->copy($path_origen, $path_destino, $marca)) {
             $this->remove($path_origen, $marca);

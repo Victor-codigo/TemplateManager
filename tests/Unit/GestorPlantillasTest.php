@@ -114,7 +114,7 @@ class GestorPlantillasTest extends TestCase
 
     #[Test]
     #[DataProvider('providerGetPlantilla')]
-    public function getPlantilla($provider)
+    public function getPlantilla($provider): void
     {
         $g_plantillas__plantilla = $this->propertyEdit($this->object, 'plantillas');
 
@@ -179,7 +179,7 @@ class GestorPlantillasTest extends TestCase
 
     #[Test]
     #[DataProvider('providerGetData')]
-    public function getData($provider)
+    public function getData($provider): void
     {
         if (isset($this->plantillas_data[$provider['expect']])) {
             $provider['expect'] = $this->plantillas_data[$provider['expect']];
@@ -212,7 +212,7 @@ class GestorPlantillasTest extends TestCase
     }
 
     #[Test]
-    public function setData__GestorPlantillas()
+    public function setData__GestorPlantillas(): void
     {
         $g_plantillas__plantillas_data = $this->propertyEdit($this->object, 'plantillas_data');
 
@@ -235,7 +235,7 @@ class GestorPlantillasTest extends TestCase
     }
 
     #[Test]
-    public function getLang()
+    public function getLang(): void
     {
         $this->propertyEdit($this->object, 'lang', 'lang');
         $resultado = $this->object->getLang();
@@ -248,7 +248,7 @@ class GestorPlantillasTest extends TestCase
     }
 
     #[Test]
-    public function setLang()
+    public function setLang(): void
     {
         $lang_mock = $this
             ->getMockBuilder(Lang::class)
@@ -265,7 +265,7 @@ class GestorPlantillasTest extends TestCase
     }
 
     #[Test]
-    public function cargarPlantilla__La_plantilla_no_esta_cargada()
+    public function cargarPlantilla__La_plantilla_no_esta_cargada(): void
     {
         $plantilla_config = new PlantillaConfig();
         $plantilla_config->path = PlantillaDataMuestraOtraGestor::PATH;
@@ -287,7 +287,7 @@ class GestorPlantillasTest extends TestCase
     }
 
     #[Test]
-    public function cargarPlantilla__La_plantilla_ya_esta_cargada()
+    public function cargarPlantilla__La_plantilla_ya_esta_cargada(): void
     {
         $plantilla_config = new PlantillaConfig();
         $plantilla_config->path = PlantillaDataMuestraGestor::PATH;

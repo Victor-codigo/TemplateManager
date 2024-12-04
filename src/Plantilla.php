@@ -65,7 +65,7 @@ class Plantilla
      *
      * @throws ExceptionPlantillaNoEncontrada si no se puede leer el path
      */
-    public function setPath($path)
+    public function setPath($path): void
     {
         if (is_readable($path)) {
             $this->path = $path;
@@ -88,7 +88,7 @@ class Plantilla
      *
      * @param string $lang_raiz raíz del path de idioma
      */
-    public function setLangRaiz($lang_raiz)
+    public function setLangRaiz($lang_raiz): void
     {
         $this->lang_raiz = $lang_raiz;
     }
@@ -167,7 +167,7 @@ class Plantilla
      *
      * @throws ExceptionPlantillaCargar si no se puede leer o no devuelve una función
      */
-    private function cargar($path)
+    private function cargar($path): void
     {
         if (is_readable($path)) {
             $plantilla = require $path;

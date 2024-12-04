@@ -97,7 +97,7 @@ class PlantillaTest extends TestCase
     }
 
     #[Test]
-    public function getPath()
+    public function getPath(): void
     {
         $plantilla__path = $this->propertyEdit($this->object, 'path', 'path/de/la/plantilla');
 
@@ -141,7 +141,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerSetPath')]
-    public function setPath($provider)
+    public function setPath($provider): void
     {
         $plantilla__path = $this->propertyEdit($this->object, 'path');
 
@@ -163,7 +163,7 @@ class PlantillaTest extends TestCase
     }
 
     #[Test]
-    public function setLangRaiz()
+    public function setLangRaiz(): void
     {
         $lang_raiz = 'lang.raiz';
 
@@ -177,7 +177,7 @@ class PlantillaTest extends TestCase
     }
 
     #[Test]
-    public function getLangRaiz()
+    public function getLangRaiz(): void
     {
         $lang_raiz = 'lang.raiz';
         $this->propertyEdit($this->object, 'lang_raiz', $lang_raiz);
@@ -192,7 +192,7 @@ class PlantillaTest extends TestCase
     }
 
     #[Test]
-    public function getCallback()
+    public function getCallback(): void
     {
         $callback = function (): void {};
         $plantillaCallabck = $this->propertyEdit($this->object, 'callback', $callback);
@@ -255,7 +255,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerCargar')]
-    public function cargar($provider)
+    public function cargar($provider): void
     {
         $plantilla__callback = $this->propertyEdit($this->object, 'callback');
 
@@ -348,7 +348,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerRender')]
-    public function render22($provider)
+    public function render22($provider): void
     {
         if ($provider['expect'] instanceof \Exception) {
             $this->expectException($provider['expect']::class);
@@ -388,7 +388,7 @@ class PlantillaTest extends TestCase
     }
 
     #[Test]
-    public function renderPlantilla()
+    public function renderPlantilla(): void
     {
         $expect = 'Hola';
         $this->gestor_mock->expects($this->once())
@@ -437,7 +437,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerExistedata')]
-    public function existeData($provider)
+    public function existeData($provider): void
     {
         $this->gestor_mock
             ->expects($this->once())
@@ -491,7 +491,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerData')]
-    public function data__devuelve_string($provider)
+    public function data__devuelve_string($provider): void
     {
         $resultado = $this->object->data($provider['params']['valores'], true);
 
@@ -504,7 +504,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerData')]
-    public function data__echo($provider)
+    public function data__echo($provider): void
     {
         $this->expectOutputString($provider['expect']);
 
@@ -648,7 +648,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerUrl')]
-    public function url__echo($provider)
+    public function url__echo($provider): void
     {
         $this->expectOutputString($provider['expect']);
 
@@ -691,7 +691,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerjson')]
-    public function json__Devuelve_un_string($provider)
+    public function json__Devuelve_un_string($provider): void
     {
         $resultado = $this->object->json(
             $provider['params']['json'],
@@ -709,7 +709,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerjson')]
-    public function json__echo($provider)
+    public function json__echo($provider): void
     {
         $this->expectOutputString($provider['expect']);
 
@@ -776,7 +776,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerAtr')]
-    public function atr__Devuelve_string($provider)
+    public function atr__Devuelve_string($provider): void
     {
         $resultado = $this->object->atr(
             $provider['params']['atr'],
@@ -794,7 +794,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerAtr')]
-    public function atr__Echo($provider)
+    public function atr__Echo($provider): void
     {
         $this->expectOutputString($provider['expect']);
 
@@ -857,7 +857,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerEach')]
-    public function each($provider)
+    public function each($provider): void
     {
         $resultado = $this->object->each(
             $provider['params']['array'],
@@ -875,7 +875,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerEach')]
-    public function each__Echo($provider)
+    public function each__Echo($provider): void
     {
         $this->expectOutputString($provider['expect']);
 
@@ -888,7 +888,7 @@ class PlantillaTest extends TestCase
     }
 
     #[Test]
-    public function lang__Devuelve_un_string()
+    public function lang__Devuelve_un_string(): void
     {
         $path = 'path.a.la.ruta.del.idioma';
         $sustitucion = ['sustituir'];
@@ -917,7 +917,7 @@ class PlantillaTest extends TestCase
     }
 
     #[Test]
-    public function lang__Echo()
+    public function lang__Echo(): void
     {
         $path = 'path.a.la.ruta.del.idioma';
         $sustitucion = ['sustituir'];
@@ -941,7 +941,7 @@ class PlantillaTest extends TestCase
     }
 
     #[Test]
-    public function langHtml__No_escapa_los_valores_sustituidos_devuelve_un_string()
+    public function langHtml__No_escapa_los_valores_sustituidos_devuelve_un_string(): void
     {
         $path = 'path.a.la.ruta.del.idioma';
         $sustitucion = ['SUSTITUIR' => '<a href="#link">link</a>'];
@@ -971,7 +971,7 @@ class PlantillaTest extends TestCase
     }
 
     #[Test]
-    public function langHtml__Escapata_el_texto_pero_no_escapa_los_valores_sustituidos_devuelve_un_string()
+    public function langHtml__Escapata_el_texto_pero_no_escapa_los_valores_sustituidos_devuelve_un_string(): void
     {
         $path = 'path.a.la.ruta.del.idioma';
         $sustitucion = ['SUSTITUIR' => '<a href="#link">link</a>'];
@@ -1001,7 +1001,7 @@ class PlantillaTest extends TestCase
     }
 
     #[Test]
-    public function langHtml__Echo()
+    public function langHtml__Echo(): void
     {
         $path = 'path.a.la.ruta.del.idioma';
         $sustitucion = ['SUSTITUIR' => '<a href="#link">link</a>'];
