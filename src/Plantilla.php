@@ -137,10 +137,10 @@ class Plantilla
      * @param GestorPlantillas $gestor gestor de plantillas
      * @param PlantillaConfig  $config Configuración de la plantilla
      */
-    public function __construct(/**
-     * Gestor al que pertenece la plantilla.
-     */
-    private GestorPlantillas $gestor, PlantillaConfig $config)
+    public function __construct(
+        private ?GestorPlantillas $gestor,
+        PlantillaConfig $config
+    )
     {
         $this->setPath($config->path);
         $this->setLangRaiz($config->lang_raiz);

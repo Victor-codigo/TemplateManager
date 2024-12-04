@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit;
 
 use Lib\Comun\Lang;
@@ -10,9 +12,9 @@ use Lib\PlantillaConfig;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Tests\comun\PhpunitUtil;
 use Tests\Unit\Fixtures\PlantillaDataMuestraGestor;
 use Tests\Unit\Fixtures\PlantillaDataMuestraOtraGestor;
+use Tests\comun\PhpunitUtil;
 
 class GestorPlantillasTest extends TestCase
 {

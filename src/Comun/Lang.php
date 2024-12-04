@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lib\Comun;
 
 use Lib\Comun\Coleccion\ArrayPath;

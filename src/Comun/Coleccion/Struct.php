@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lib\Comun\Coleccion;
 
 class Struct implements \Serializable
