@@ -280,7 +280,7 @@ class Lang
      * @param string $path  path en el que se guarda la variable
      * @param string $marca carácter que separa los niveles del path
      */
-    public function remove($path, $marca = self::SEPARADOR)
+    public function remove($path, $marca = self::SEPARADOR): bool
     {
         return $this->lang_vars->removePath($path, $marca);
     }
