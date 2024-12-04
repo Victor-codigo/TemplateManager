@@ -32,7 +32,7 @@ class Lang
      *
      * @param type $path
      */
-    public function setLangPath($path): void
+    public function setLangPath(string $path): void
     {
         $this->lang_path = $path;
     }
@@ -41,10 +41,8 @@ class Lang
      * Obtiene el path donde se guardan los idiomas.
      *
      * @version 1.0
-     *
-     * @return string
      */
-    public function getLangPath()
+    public function getLangPath(): string
     {
         return $this->lang_path;
     }
@@ -82,7 +80,7 @@ class Lang
      *               relativo al la carpeta donde se
      *               guardan los idiomas
      */
-    public function getLangs()
+    public function getLangs(): array
     {
         return $this->langs;
     }
@@ -115,7 +113,7 @@ class Lang
      *
      * @return int|string
      */
-    public function getLang()
+    public function getLang(): int|string|null
     {
         return $this->lang;
     }

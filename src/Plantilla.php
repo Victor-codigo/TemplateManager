@@ -86,7 +86,7 @@ class Plantilla
      *
      * @param string $lang_raiz raíz del path de idioma
      */
-    public function setLangRaiz($lang_raiz): void
+    public function setLangRaiz(string $lang_raiz): void
     {
         $this->lang_raiz = $lang_raiz;
     }
@@ -96,7 +96,7 @@ class Plantilla
      *
      * @version 1.0
      */
-    public function getLangRaiz()
+    public function getLangRaiz(): string
     {
         return $this->lang_raiz;
     }
