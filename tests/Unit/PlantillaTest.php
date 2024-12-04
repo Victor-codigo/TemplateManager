@@ -143,7 +143,7 @@ class PlantillaTest extends TestCase
     {
         $plantilla__path = $this->propertyEdit($this->object, 'path');
 
-        PlantillaFixture::$is_readable = fn() => $provider['mock']['isReadable'];
+        PlantillaFixture::$is_readable = fn () => $provider['mock']['isReadable'];
 
         if ($provider['mock']['isReadable']) {
             PlantillaFixture::$is_readable = fn (...$args): bool => true;
@@ -359,7 +359,7 @@ class PlantillaTest extends TestCase
             ->method('getData')
             ->willReturn($provider['mock']['getData']);
 
-        /** @var MockObject&Plantilla $plantilla_mock */
+        /** @var MockObject&PlantillaForTesting $plantilla_mock */
         $plantilla_mock = $this
             ->getMockBuilder(PlantillaForTesting::class)
             ->setConstructorArgs([$this->gestor_mock, $this->plantilla_config])

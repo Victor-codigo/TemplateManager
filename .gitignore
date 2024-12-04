@@ -1,2 +1,4 @@
 .docker
+.php-cs-fixer.cache
+.phpunit.cache
 /vendor/

@@ -138,8 +138,7 @@ class Plantilla
     public function __construct(
         private ?GestorPlantillas $gestor,
         PlantillaConfig $config
-    )
-    {
+    ) {
         $this->setPath($config->path);
         $this->setLangRaiz($config->lang_raiz);
         $this->cargar($config->path);

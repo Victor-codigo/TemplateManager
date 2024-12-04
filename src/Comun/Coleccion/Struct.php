@@ -54,9 +54,9 @@ class Struct implements \Serializable
      *
      * @return Struct
      */
-    public function fromStruct(Struct $struct, $crear = false)
+    public function fromStruct(Struct $struct, $crear = false):void
     {
-        return $this->fromArray($struct->toArray(0));
+         $this->fromArray($struct->toArray(0));
     }
 
     /**

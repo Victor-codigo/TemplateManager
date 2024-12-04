@@ -379,6 +379,7 @@ trait PhpunitUtil
     public function assertArrayObjectHasAttribute($atributo, array $array, string $mensaje = ''): void
     {
         foreach ($array as $indice => $objeto) {
+            // @phpstan-ignore method.notFound
             $this->assertObjectHasAttribute(
                 $atributo,
                 $objeto,
@@ -400,6 +401,7 @@ trait PhpunitUtil
      */
     public function assertObjectAttributeValue($atributo, mixed $valor, $objeto, string $mensaje = ''): void
     {
+        // @phpstan-ignore method.notFound
         $this->assertObjectHasAttribute(
             $atributo,
             $objeto,
