@@ -111,7 +111,7 @@ trait PhpunitUtil
      *
      * @throws GetPropertyException
      */
-    private function getProperty(\ReflectionClass $class, $name, $access)
+    private function getProperty(\ReflectionClass $class, string $name, $access)
     {
         $reflectedClases = $this->getParents($class);
         array_unshift($reflectedClases, $class);
@@ -146,7 +146,7 @@ trait PhpunitUtil
      *
      * @throws GetMethodException
      */
-    private function getMethod(\ReflectionClass $class, $name, $access)
+    private function getMethod(\ReflectionClass $class, string $name, $access)
     {
         $reflected_clases = $this->getParents($class);
         array_unshift($reflected_clases, $class);
@@ -376,7 +376,7 @@ trait PhpunitUtil
      * @param array  $array    array de objetos
      * @param string $mensaje  mensaje de error
      */
-    public function assertArrayObjectHasAttribute($atributo, array $array, $mensaje = ''): void
+    public function assertArrayObjectHasAttribute($atributo, array $array, string $mensaje = ''): void
     {
         foreach ($array as $indice => $objeto) {
             $this->assertObjectHasAttribute(
@@ -398,7 +398,7 @@ trait PhpunitUtil
      * @param object $objeto   objeto que se comprueba
      * @param string $mensaje  mensaje de error
      */
-    public function assertObjectAttributeValue($atributo, mixed $valor, $objeto, $mensaje = ''): void
+    public function assertObjectAttributeValue($atributo, mixed $valor, $objeto, string $mensaje = ''): void
     {
         $this->assertObjectHasAttribute(
             $atributo,
@@ -422,7 +422,7 @@ trait PhpunitUtil
      * @param array  $array    array a comprobar
      * @param string $mensaje  mensaje de error
      */
-    public function assertArrayInstancesOf($expected, array $array, $mensaje = ''): void
+    public function assertArrayInstancesOf($expected, array $array, string $mensaje = ''): void
     {
         foreach ($array as $indice => $objeto) {
             $this->assertInstanceOf(

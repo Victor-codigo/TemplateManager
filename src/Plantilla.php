@@ -259,7 +259,7 @@ class Plantilla
      *
      * @return string con los valores escapados
      */
-    public function lang($path, $sustitucion = [], $marca = ':', $string = false): ?string
+    public function lang(string $path, $sustitucion = [], $marca = ':', $string = false): ?string
     {
         $valor = $this->gestor->getLang()->get(
             $this->getLangRaiz().'.'.$path,
@@ -287,7 +287,7 @@ class Plantilla
      *
      * @return string con los valores escapados
      */
-    public function langHtml($path, array $sustitucion = [], $marca = ':', $string = false)
+    public function langHtml(string $path, array $sustitucion = [], $marca = ':', $string = false)
     {
         $lang = $this->gestor->getLang();
         $valor = $lang->get(
@@ -482,7 +482,7 @@ class Plantilla
      *
      * @return string con los elementos concatenados
      */
-    public function each(array $array, $modo = EACH::NORMAL, $separador = ' ', $string = false): ?string
+    public function each(array $array, $modo = EACH::NORMAL, string $separador = ' ', $string = false): ?string
     {
         $retorno = '';
 

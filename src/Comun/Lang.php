@@ -192,7 +192,7 @@ class Lang
      *
      * @throws \Exception
      */
-    public function cargar($path, $path_var = null, $separador = self::SEPARADOR): void
+    public function cargar(string $path, $path_var = null, $separador = self::SEPARADOR): void
     {
         $path_var ??= str_replace(['\\', '/'], $separador, $path);
 

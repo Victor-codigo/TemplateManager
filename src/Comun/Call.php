@@ -21,7 +21,7 @@ trait Call
      *
      * @return mixed valor devuelto por la función
      */
-    public function __call($funcion, $argumentos)
+    public function __call(string $funcion, $argumentos)
     {
         $retorno = null;
 
