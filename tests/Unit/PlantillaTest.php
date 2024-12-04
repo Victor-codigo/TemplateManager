@@ -108,7 +108,7 @@ class PlantillaTest extends TestCase
         );
     }
 
-    public static function providerSetPath()
+    public static function providerSetPath(): array
     {
         return [
             // #0
@@ -204,7 +204,7 @@ class PlantillaTest extends TestCase
         );
     }
 
-    public static function providerCargar()
+    public static function providerCargar(): array
     {
         return [
             // #0
@@ -279,7 +279,7 @@ class PlantillaTest extends TestCase
         );
     }
 
-    public static function providerRender()
+    public static function providerRender(): array
     {
         return [
             // #0
@@ -402,7 +402,7 @@ class PlantillaTest extends TestCase
         );
     }
 
-    public static function providerExistedata()
+    public static function providerExistedata(): array
     {
         return [
             // #0
@@ -452,7 +452,7 @@ class PlantillaTest extends TestCase
         );
     }
 
-    public static function providerData()
+    public static function providerData(): array
     {
         return [
             // #0
@@ -509,7 +509,7 @@ class PlantillaTest extends TestCase
         $this->object->data($provider['params']['valores'], false);
     }
 
-    public static function providerUrl()
+    public static function providerUrl(): array
     {
         return [
             // #0
@@ -658,7 +658,7 @@ class PlantillaTest extends TestCase
         );
     }
 
-    public static function providerJson()
+    public static function providerJson(): array
     {
         return [
             // #0
@@ -719,7 +719,7 @@ class PlantillaTest extends TestCase
         );
     }
 
-    public static function providerAtr()
+    public static function providerAtr(): array
     {
         return [
             // #0
@@ -804,7 +804,7 @@ class PlantillaTest extends TestCase
         );
     }
 
-    public static function providerEach()
+    public static function providerEach(): array
     {
         return [
             // #0

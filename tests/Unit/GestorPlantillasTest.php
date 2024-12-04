@@ -75,7 +75,7 @@ class GestorPlantillasTest extends TestCase
         $this->propertyEdit($this->object, 'plantillas_data', $this->plantillas_data);
     }
 
-    public static function providerGetPlantilla()
+    public static function providerGetPlantilla(): array
     {
         return [
             // #0
@@ -140,7 +140,7 @@ class GestorPlantillasTest extends TestCase
         }
     }
 
-    public static function providerGetData()
+    public static function providerGetData(): array
     {
         return [
             // #0
@@ -310,7 +310,7 @@ class GestorPlantillasTest extends TestCase
         );
     }
 
-    public static function providerRenderPlantilla()
+    public static function providerRenderPlantilla(): array
     {
         return [
             // #0
