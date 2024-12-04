@@ -261,7 +261,7 @@ class Plantilla
      *
      * @return string con los valores escapados
      */
-    public function lang($path, $sustitucion = [], $marca = ':', $string = false)
+    public function lang($path, $sustitucion = [], $marca = ':', $string = false): ?string
     {
         $valor = $this->gestor->getLang()->get(
             $this->getLangRaiz().'.'.$path,
@@ -326,7 +326,7 @@ class Plantilla
      *
      * @return string con los valores escapados
      */
-    public function data($valor, $string = false)
+    public function data($valor, $string = false): ?string
     {
         $data = htmlspecialchars(
             $valor,
@@ -357,7 +357,7 @@ class Plantilla
      *
      * @return string URL saneada
      */
-    public function url($url, array $sustitucion = [' ' => '-'], $seccionSeparador = self::URL_SECCION_SEPARADOR, $string = false)
+    public function url($url, array $sustitucion = [' ' => '-'], $seccionSeparador = self::URL_SECCION_SEPARADOR, $string = false): ?string
     {
         $url_trozos = explode($seccionSeparador, trim($url));
         $sustituido = array_keys($sustitucion);
@@ -420,7 +420,7 @@ class Plantilla
      *
      * @return string Si existe la variable, devuelve la variable convertida a JSON
      */
-    public function json($json, $opciones = JSON_HEX_TAG | JSON_HEX_AMP, $depth = 512, $string = false)
+    public function json($json, $opciones = JSON_HEX_TAG | JSON_HEX_AMP, $depth = 512, $string = false): ?string
     {
         $retorno = json_encode($json, $opciones, $depth);
 
@@ -447,7 +447,7 @@ class Plantilla
      *
      * @return string con el atributo y su valor escapado
      */
-    public function atr($atr, $valor, $tipo = TIPODATO::DATA, $string = false)
+    public function atr($atr, $valor, $tipo = TIPODATO::DATA, $string = false): ?string
     {
         $retorno = '';
 
@@ -484,7 +484,7 @@ class Plantilla
      *
      * @return string con los elementos concatenados
      */
-    public function each(array $array, $modo = EACH::NORMAL, $separador = ' ', $string = false)
+    public function each(array $array, $modo = EACH::NORMAL, $separador = ' ', $string = false): ?string
     {
         $retorno = '';
 
