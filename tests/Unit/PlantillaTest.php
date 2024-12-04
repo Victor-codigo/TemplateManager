@@ -629,7 +629,7 @@ class PlantillaTest extends TestCase
      * @covers \GT\Libs\Sistema\Plantilla\Plantilla::urlEspaceHttpYSharp
      */
     #[DataProvider('providerUrl')]
-    public function testUrlDevuelveString($provider)
+    public function testUrlDevuelveString($provider): void
     {
         $resultado = $this->object->url(
             $provider['params']['url'],

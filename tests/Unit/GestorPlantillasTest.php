@@ -373,7 +373,7 @@ class GestorPlantillasTest extends TestCase
 
     #[Test]
     #[DataProvider('providerRenderPlantilla')]
-    public function testRenderPlantilla($provider)
+    public function testRenderPlantilla($provider): void
     {
         if ($provider['expect'] instanceof \Exception) {
             $this->expectException(ExceptionDataCargar::class);
