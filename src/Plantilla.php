@@ -242,7 +242,7 @@ class Plantilla
      *
      * @return bool TRUE si existe, FALSE si no existe
      */
-    public function existeData($id)
+    public function existeData($id): bool
     {
         return null !== $this->gestor->getData($id);
     }
