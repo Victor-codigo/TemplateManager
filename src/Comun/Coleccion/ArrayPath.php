@@ -36,7 +36,7 @@ class ArrayPath extends ArrayBase
      * @return bool TRUE si se creó con éxito,
      *              FALSE si no se creó
      */
-    public function setPath($path, mixed $value, $separator = '.')
+    public function setPath($path, mixed $value, $separator = '.'): bool
     {
         if ('' === $path) {
             $this->items = [$value];
@@ -93,7 +93,7 @@ class ArrayPath extends ArrayBase
      * @return bool TRUE si se borró correctamente,
      *              FALSE si no se borró
      */
-    public function removePath($path, $separator = '.')
+    public function removePath($path, $separator = '.'): bool
     {
         if ('' == $path) {
             $this->clear();
