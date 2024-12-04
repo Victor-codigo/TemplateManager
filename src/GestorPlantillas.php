@@ -189,7 +189,7 @@ class GestorPlantillas
      *
      * @throws ExceptionDataCargar Si no se encuentra el identificador de la información pasada
      */
-    public function renderPlantilla($data, $string = false)
+    public function renderPlantilla($data, $string = false): string|bool
     {
         if (is_string($data)) {
             $data = $this->getData($data);
