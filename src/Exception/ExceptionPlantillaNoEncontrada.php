@@ -6,5 +6,4 @@ namespace Lib\Exception;
 
 class ExceptionPlantillaNoEncontrada extends \Exception
 {
-
 }

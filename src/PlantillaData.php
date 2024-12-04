@@ -5,20 +5,21 @@ namespace Lib;
 use Lib\Comun\Coleccion\Struct;
 
 /**
- * Estructura base para las estructuras de datos de las plantillas
+ * Estructura base para las estructuras de datos de las plantillas.
  */
 class PlantillaData extends Struct
 {
     /**
-     * Path de la plantilla HTML
+     * Path de la plantilla HTML.
      */
-    const string PATH = '';
+    public const string PATH = '';
 
     /**
-     * Path raíz de idioma
+     * Path raíz de idioma.
+     *
      * @var string
      */
-    const LANG_RAIZ = '';
+    public const LANG_RAIZ = '';
 
     /*
      * ...

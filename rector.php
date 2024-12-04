@@ -7,7 +7,7 @@ use Rector\ValueObject\PhpVersion;
 return RectorConfig::configure()
     // register single rule
     ->withRules([
-        TypedPropertyFromStrictConstructorRector::class
+        TypedPropertyFromStrictConstructorRector::class,
     ])
     // here we can define, what prepared sets of rules will be applied
     ->withPreparedSets(
