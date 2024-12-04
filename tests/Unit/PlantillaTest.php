@@ -43,9 +43,8 @@ class PlantillaTest extends TestCase
     /**
      * Clase Lang.
      *
-     * @var PHPUnit_Framework_MockObject_MockObject
      */
-    private $lang;
+    private MockObject&Lang $lang;
 
     /**
      * PlantillaData de muestra.

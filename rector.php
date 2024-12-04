@@ -1,5 +1,6 @@
  <?php
 
+use Rector\CodeQuality\Rector\Include_\AbsolutizeRequireAndIncludePathRector;
 use Rector\Config\RectorConfig;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromStrictConstructorRector;
@@ -19,7 +20,7 @@ return RectorConfig::configure()
         'src',
         'tests'
     ])
-    ->withTypeCoverageLevel(3)
+    ->withTypeCoverageLevel(4)
     ->withPhpSets(php84: true)
     ->withSets([
         PHPUnitSetList::PHPUNIT_110,
@@ -29,4 +30,7 @@ return RectorConfig::configure()
         removeUnusedImports: true,
         importShortClasses: false
     )
-    ->withSkipPath('vendor');
+    ->withSkipPath('vendor')
+    ->withSkip([
+        AbsolutizeRequireAndIncludePathRector::class
+    ]);
