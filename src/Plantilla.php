@@ -228,7 +228,7 @@ class Plantilla
      *
      * @return Plantilla plantilla creada
      */
-    public function renderPlantilla($data, $string = false)
+    public function renderPlantilla($data, $string = false): string|bool
     {
         return $this->gestor->renderPlantilla($data, $string);
     }
