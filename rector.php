@@ -20,7 +20,7 @@ return RectorConfig::configure()
         'src',
         'tests'
     ])
-    ->withTypeCoverageLevel(15)
+    ->withTypeCoverageLevel(17)
     ->withPhpSets(php84: true)
     ->withSets([
         PHPUnitSetList::PHPUNIT_110,

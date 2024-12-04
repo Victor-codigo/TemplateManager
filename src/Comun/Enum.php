@@ -13,10 +13,8 @@ abstract class Enum
      * Crea la reflexión de la enumeración.
      *
      * @version 1.0
-     *
-     * @return \ReflectionClass
      */
-    private static function getReflexion()
+    private static function getReflexion(): \ReflectionClass
     {
         return new \ReflectionClass(static::class);
     }
