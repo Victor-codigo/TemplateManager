@@ -167,7 +167,7 @@ class Plantilla
      *
      * @throws ExceptionPlantillaCargar si no se puede leer o no devuelve una función
      */
-    private function cargar($path): void
+    private function cargar(string $path): void
     {
         if (is_readable($path)) {
             $plantilla = require $path;
@@ -385,7 +385,7 @@ class Plantilla
      *
      * @return string url corregida
      */
-    private function urlEspaceHttpYSharp($url)
+    private function urlEspaceHttpYSharp(string $url)
     {
         $patron = [];
         $reemplazo = [];
