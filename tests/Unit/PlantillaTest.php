@@ -141,7 +141,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerSetPath')]
-    public function setPath($provider): void
+    public function setPath(array $provider): void
     {
         $plantilla__path = $this->propertyEdit($this->object, 'path');
 
@@ -255,7 +255,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerCargar')]
-    public function cargar($provider): void
+    public function cargar(array $provider): void
     {
         $plantilla__callback = $this->propertyEdit($this->object, 'callback');
 
@@ -348,7 +348,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerRender')]
-    public function render22($provider): void
+    public function render(array $provider): void
     {
         if ($provider['expect'] instanceof \Exception) {
             $this->expectException($provider['expect']::class);
@@ -437,7 +437,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerExistedata')]
-    public function existeData($provider): void
+    public function existeData(array $provider): void
     {
         $this->gestor_mock
             ->expects($this->once())
@@ -491,7 +491,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerData')]
-    public function data__devuelve_string($provider): void
+    public function data__devuelve_string(array $provider): void
     {
         $resultado = $this->object->data($provider['params']['valores'], true);
 
@@ -504,7 +504,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerData')]
-    public function data__echo($provider): void
+    public function data__echo(array $provider): void
     {
         $this->expectOutputString($provider['expect']);
 
@@ -630,7 +630,7 @@ class PlantillaTest extends TestCase
      * @covers \GT\Libs\Sistema\Plantilla\Plantilla::urlEspaceHttpYSharp
      */
     #[DataProvider('providerUrl')]
-    public function testUrlDevuelveString($provider): void
+    public function testUrlDevuelveString(array $provider): void
     {
         $resultado = $this->object->url(
             $provider['params']['url'],
@@ -648,7 +648,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerUrl')]
-    public function url__echo($provider): void
+    public function url__echo(array $provider): void
     {
         $this->expectOutputString($provider['expect']);
 
@@ -691,7 +691,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerjson')]
-    public function json__Devuelve_un_string($provider): void
+    public function json__Devuelve_un_string(array $provider): void
     {
         $resultado = $this->object->json(
             $provider['params']['json'],
@@ -709,7 +709,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerjson')]
-    public function json__echo($provider): void
+    public function json__echo(array $provider): void
     {
         $this->expectOutputString($provider['expect']);
 
@@ -776,7 +776,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerAtr')]
-    public function atr__Devuelve_string($provider): void
+    public function atr__Devuelve_string(array $provider): void
     {
         $resultado = $this->object->atr(
             $provider['params']['atr'],
@@ -794,7 +794,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerAtr')]
-    public function atr__Echo($provider): void
+    public function atr__Echo(array $provider): void
     {
         $this->expectOutputString($provider['expect']);
 
@@ -857,7 +857,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerEach')]
-    public function each($provider): void
+    public function each(array $provider): void
     {
         $resultado = $this->object->each(
             $provider['params']['array'],
@@ -875,7 +875,7 @@ class PlantillaTest extends TestCase
 
     #[Test]
     #[DataProvider('providerEach')]
-    public function each__Echo($provider): void
+    public function each__Echo(array $provider): void
     {
         $this->expectOutputString($provider['expect']);
 

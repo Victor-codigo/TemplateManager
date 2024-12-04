@@ -114,7 +114,7 @@ class GestorPlantillasTest extends TestCase
 
     #[Test]
     #[DataProvider('providerGetPlantilla')]
-    public function getPlantilla($provider): void
+    public function getPlantilla(array $provider): void
     {
         $g_plantillas__plantilla = $this->propertyEdit($this->object, 'plantillas');
 
@@ -179,7 +179,7 @@ class GestorPlantillasTest extends TestCase
 
     #[Test]
     #[DataProvider('providerGetData')]
-    public function getData($provider): void
+    public function getData(array $provider): void
     {
         if (isset($this->plantillas_data[$provider['expect']])) {
             $provider['expect'] = $this->plantillas_data[$provider['expect']];
@@ -375,7 +375,7 @@ class GestorPlantillasTest extends TestCase
 
     #[Test]
     #[DataProvider('providerRenderPlantilla')]
-    public function testRenderPlantilla($provider): void
+    public function testRenderPlantilla(array $provider): void
     {
         if ($provider['expect'] instanceof \Exception) {
             $this->expectException(ExceptionDataCargar::class);
