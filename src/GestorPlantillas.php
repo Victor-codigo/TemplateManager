@@ -14,7 +14,7 @@ class GestorPlantillas
      *
      * @var Plantilla[]
      */
-    private $plantillas = [];
+    private array $plantillas = [];
 
     /**
      * Obtiene una plantilla.
@@ -52,7 +52,7 @@ class GestorPlantillas
      *
      * @var PlantillaData[]
      */
-    private $plantillas_data = [];
+    private array $plantillas_data = [];
 
     /**
      * Obtiene la información cargada para una plantilla

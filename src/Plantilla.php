@@ -76,10 +76,8 @@ class Plantilla
 
     /**
      * Raíz del path de idioma.
-     *
-     * @var string
      */
-    private $lang_raiz = '';
+    private string $lang_raiz = '';
 
     /**
      * Establece la raíz del path de idioma.

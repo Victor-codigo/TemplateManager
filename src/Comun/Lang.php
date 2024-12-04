@@ -24,10 +24,8 @@ class Lang
 
     /**
      * Path donde se guardan los idiomas.
-     *
-     * @var string
      */
-    private $lang_path = '';
+    private string $lang_path = '';
 
     /**
      * Establece el path donde se guardan los idiomas.
@@ -56,10 +54,8 @@ class Lang
      * - arr[identificador del idioma] = string, path de la carpeta de idioma
      *                                          relativo al la carpeta donde se
      *                                          guardan los idiomas.
-     *
-     * @var array
      */
-    private $langs = [];
+    private array $langs = [];
 
     /**
      * Establece los idiomas válidos.
@@ -96,7 +92,7 @@ class Lang
      *
      * @var int|string
      */
-    private $lang;
+    private int|string|null $lang = null;
 
     /**
      * Establece el idioma a cargar.
@@ -160,10 +156,8 @@ class Lang
     /**
      * Array con las variables de los idiomas ordenados por grupos. Con el siguiente
      * formato: arr[nombre del grupo] = array, variables del grupo.
-     *
-     * @var ArrayPath
      */
-    private $lang_vars;
+    private ?ArrayPath $lang_vars = null;
 
     /**
      * Constructor.
