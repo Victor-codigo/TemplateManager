@@ -160,7 +160,7 @@ class Struct implements \Serializable
      *
      * @return string[] Nombre de las propiedades
      */
-    public function getPropiedades()
+    public function getPropiedades(): array
     {
         return array_keys(get_object_vars($this));
     }
@@ -172,7 +172,7 @@ class Struct implements \Serializable
      *
      * @return mixed[] valores de las propiedades
      */
-    public function getValores()
+    public function getValores(): array
     {
         return get_object_vars($this);
     }
