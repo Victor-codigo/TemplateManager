@@ -82,7 +82,7 @@ trait PhpunitUtil
      *
      * @return \ReflectionClass[] clases parientes
      */
-    private function getParents(\ReflectionClass $class, $until = null)
+    private function getParents(\ReflectionClass $class, $until = null): array
     {
         $parents = [];
 
