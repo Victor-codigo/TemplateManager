@@ -6,6 +6,8 @@ namespace Tests\comun;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub\Stub;
+use ReflectionMethod;
+use ReflectionProperty;
 use Tests\comun\Exceptions\GetMethodException;
 use Tests\comun\Exceptions\GetPropertyException;
 
@@ -107,11 +109,10 @@ trait PhpunitUtil
      * @param string           $name   nombre de la propiedad
      * @param bool             $access TRUE si la propiedad se hace publica, FALSE si no
      *
-     * @return ReflectionProperty propiedad
      *
      * @throws GetPropertyException
      */
-    private function getProperty(\ReflectionClass $class, string $name, $access)
+    private function getProperty(\ReflectionClass $class, string $name, $access): ReflectionProperty
     {
         $reflectedClases = $this->getParents($class);
         array_unshift($reflectedClases, $class);
@@ -120,7 +121,6 @@ trait PhpunitUtil
             if ($class->hasProperty($name)) {
                 $property = $class->getProperty($name);
                 $property->setAccessible($access);
-                // $class::$name = $property->getValue($class);
 
                 break;
             }
@@ -142,11 +142,10 @@ trait PhpunitUtil
      * @param string           $name   nombre del método
      * @param bool             $access TRUE si la propiedad se hace publica, FALSE si no
      *
-     * @return ReflectionMethod método
      *
      * @throws GetMethodException
      */
-    private function getMethod(\ReflectionClass $class, string $name, $access)
+    private function getMethod(\ReflectionClass $class, string $name, $access):ReflectionMethod
     {
         $reflected_clases = $this->getParents($class);
         array_unshift($reflected_clases, $class);
@@ -179,9 +178,8 @@ trait PhpunitUtil
      *
      * @return ReflectionProperty Propiedad
      *
-     * @throws Exception
      */
-    protected function propertyEdit($object, $property_name, mixed $value = null, $access = true)
+    protected function propertyEdit($object, $property_name, mixed $value = null, $access = true):ReflectionProperty
     {
         $property = $this->getProperty(
             $this->reflectClass($object),
@@ -204,9 +202,8 @@ trait PhpunitUtil
      * @param string $object objeto que se reflecta
      * @param string $method nombre del método
      *
-     * @return ReflectionMethod Método
      */
-    protected function setMethodPublic($object, $method)
+    protected function setMethodPublic($object, $method):ReflectionMethod
     {
         return $this->getMethod(
             $this->reflectClass($object),
@@ -215,94 +212,13 @@ trait PhpunitUtil
         );
     }
 
-    /**
-     * Invoca un método privado o protegido.
-     *
-     * @version  1.0
-     *
-     * @param string $objeto objeto que se reflecta
-     * @param string $nombre nombre del método
-     * @param array  $args   argumentos que se pasa al método
-     *
-     * @return mixed valor retornado por la función invocada
-     */
-    protected function invocar($objeto, $nombre, array $args = [])
-    {
-        $metodo = $this->setMethodPublic($objeto, $nombre);
 
-        return $metodo->invokeArgs($objeto, $args);
-    }
 
-    /**
-     * Crea un stub de un mock.
-     *
-     * @version 1.0
-     *
-     * @param MockObject $mock   mock al que se le crea un stub
-     * @param Stub       $method stub que se crea
-     */
-    protected function setMockMethod(MockObject $mock, Stub $method)
-    {
-        $stub = null === $method->times
-            ? $mock->expects($this->any())
-            : $mock->expects($method->times);
 
-        $stub->method($method->method);
 
-        if (null !== $method->with) {
-            $stub->with(...$method->with);
-        }
 
-        if (null !== $method->will) {
-            $stub->will($method->will);
-        }
-    }
 
-    /**
-     * Crea el mock de una clase.
-     *
-     * @version 1.0
-     *
-     * @deprecated since version number
-     *
-     * @param Stub[] $metodos métodos para los que se crea un stub
-     *
-     * @return PHPUnit_Framework_MockObject_MockObject
-     */
-    public function mock($class_mock, array $metodos = [])
-    {
-        $metodos_nombre = [];
-        foreach ($metodos as $metodo) {
-            $metodos_nombre[] = $metodo->method;
-        }
 
-        $mock = $this
-            ->getMockBuilder($class_mock)
-            ->disableOriginalConstructor()
-            ->setMethods($metodos_nombre)
-            ->getMock();
-
-        $this->setMockMethods($mock, $metodos);
-
-        return $mock;
-    }
-
-    /**
-     * Genera  los stubs para el mock del objeto pasado.
-     *
-     * @version 1.0
-     *
-     * @deprecated since version number
-     *
-     * @param object $object  mock del objeto
-     * @param Stub[] $methods stubs que se crean
-     */
-    public function setMockMethods($object, array $methods): void
-    {
-        foreach ($methods as $method) {
-            $this->setMockMethod($object, $method);
-        }
-    }
 
     /**
      * Testea el destructor de la clase.

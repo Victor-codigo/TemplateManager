@@ -224,7 +224,6 @@ class Plantilla
      * @param bool                 $string TRUE si la plantilla se carga en una cadena,
      *                                     FALSE si se carga en el buffer de salida
      *
-     * @return Plantilla plantilla creada
      */
     public function renderPlantilla($data, $string = false): string|bool
     {
@@ -251,15 +250,14 @@ class Plantilla
      * @version 1.0
      *
      * @param string $path        path de la variable
-     * @param type   $sustitucion con los place-holders a sustituir. Con el siguiente formato:
+     * @param array   $sustitucion con los place-holders a sustituir. Con el siguiente formato:
      *                            - arr[place-holder sin marcador] = string, reemplazo
      * @param string $marca       caracteres que se utilizan para marcar el place-holder
      * @param bool   $string      TRUE si devuelve un string
      *                            FALSE si se muestra por pantalla
      *
-     * @return string con los valores escapados
      */
-    public function lang(string $path, $sustitucion = [], $marca = ':', $string = false): ?string
+    public function lang(string $path,array $sustitucion = [], $marca = ':', $string = false): ?string
     {
         $valor = $this->gestor->getLang()->get(
             $this->getLangRaiz().'.'.$path,
@@ -410,7 +408,7 @@ class Plantilla
      *
      * @version 1.0
      *
-     * @param sting $json     json que se escapa
+     * @param mixed $json     json que se escapa
      * @param int   $opciones una de las constantes JSON_*
      * @param int   $depth    profundidad máxima de la variable
      * @param bool  $string   TRUE si devuelve un string
@@ -418,7 +416,7 @@ class Plantilla
      *
      * @return string Si existe la variable, devuelve la variable convertida a JSON
      */
-    public function json($json, $opciones = JSON_HEX_TAG | JSON_HEX_AMP, $depth = 512, $string = false): ?string
+    public function json(mixed $json, int $opciones = JSON_HEX_TAG | JSON_HEX_AMP, int $depth = 512,  bool $string = false): ?string
     {
         $retorno = json_encode($json, $opciones, $depth);
 
@@ -475,14 +473,14 @@ class Plantilla
      * @version 1.0
      *
      * @param array  $array     con los elementos
-     * @param EACH   $modo      establece el modo en el que se concatenen los elementos
+     * @param int   $modo      establece el modo en el que se concatenen los elementos
      * @param string $separador string con el que se separan los elementos
      * @param bool   $string    TRUE si devuelve un string
      *                          FALSE si se muestra por pantalla
      *
      * @return string con los elementos concatenados
      */
-    public function each(array $array, $modo = EACH::NORMAL, string $separador = ' ', $string = false): ?string
+    public function each(array $array, int $modo = EACH::NORMAL, string $separador = ' ', bool $string = false): ?string
     {
         $retorno = '';
 

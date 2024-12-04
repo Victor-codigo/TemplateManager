@@ -30,7 +30,6 @@ class Lang
     /**
      * Establece el path donde se guardan los idiomas.
      *
-     * @param type $path
      */
     public function setLangPath(string $path): void
     {

@@ -52,7 +52,6 @@ class Struct implements \Serializable
      *                       FALSE se omiten las propiedades de la estructura
      *                       que no pertenecen a la estructura
      *
-     * @return Struct
      */
     public function fromStruct(Struct $struct, $crear = false):void
     {
