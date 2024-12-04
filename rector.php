@@ -14,5 +14,11 @@ return RectorConfig::configure()
         deadCode: true,
         codeQuality: true
     )
+    ->withPaths([
+        'src',
+        'tests'
+    ])
+    ->withTypeCoverageLevel(1)
+    ->withPhpSets(php84: true)
     ->withPhpVersion(PhpVersion::PHP_84)
     ->withSkipPath('vendor');

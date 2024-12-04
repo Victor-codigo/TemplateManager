@@ -11,7 +11,7 @@ class Struct implements \Serializable
      */
     public function __destruct()
     {
-        foreach (get_object_vars($this) as $propiedad => $valor) {
+        foreach (array_keys(get_object_vars($this)) as $propiedad) {
             if (!is_scalar($this->$propiedad)) {
                 $this->$propiedad = null;
             }
@@ -91,9 +91,9 @@ class Struct implements \Serializable
      *
      * @param mixed $valor valor que se establece para todos las propiedades
      */
-    public function setPropiedadesValor($valor)
+    public function setPropiedadesValor(mixed $valor)
     {
-        foreach (get_object_vars($this) as $propiedad => $no_se_usa) {
+        foreach (array_keys(get_object_vars($this)) as $propiedad) {
             $this->$propiedad = $valor;
         }
     }
@@ -124,7 +124,7 @@ class Struct implements \Serializable
      *               con el siguiente formato:
      *               - arr[propiedad] = mixed, valor de la propiedad
      */
-    public function getPropiedadesNoValor($valor, $strict = false)
+    public function getPropiedadesNoValor(mixed $valor, $strict = false)
     {
         $retorno = [];
         $valor_type = gettype($valor);
@@ -134,21 +134,17 @@ class Struct implements \Serializable
                 if ($prop_valor !== $valor) {
                     $retorno[$propiedad] = $prop_valor;
                 }
-            } else {
-                if ($valor_type == gettype($prop_valor)) {
-                    if ($prop_valor != $valor) {
-                        $retorno[$propiedad] = $prop_valor;
-                    }
-                } else {
-                    if ((is_numeric($prop_valor) && is_string($valor))
-                    || (is_numeric($valor) && is_string($prop_valor))) {
-                        if ($prop_valor != $valor) {
-                            $retorno[$propiedad] = $prop_valor;
-                        }
-                    } else {
-                        $retorno[$propiedad] = $prop_valor;
-                    }
+            } elseif ($valor_type === gettype($prop_valor)) {
+                if ($prop_valor != $valor) {
+                    $retorno[$propiedad] = $prop_valor;
                 }
+            } elseif ((is_numeric($prop_valor) && is_string($valor))
+            || (is_numeric($valor) && is_string($prop_valor))) {
+                if ($prop_valor !== $valor) {
+                    $retorno[$propiedad] = $prop_valor;
+                }
+            } else {
+                $retorno[$propiedad] = $prop_valor;
             }
         }
 
@@ -164,13 +160,7 @@ class Struct implements \Serializable
      */
     public function getPropiedades()
     {
-        $retorno = [];
-
-        foreach (get_object_vars($this) as $propiedad => $prop_valor) {
-            $retorno[] = $propiedad;
-        }
-
-        return $retorno;
+        return array_keys(get_object_vars($this));
     }
 
     /**
@@ -182,13 +172,7 @@ class Struct implements \Serializable
      */
     public function getValores()
     {
-        $retorno = [];
-
-        foreach (get_object_vars($this) as $prop_valor) {
-            $retorno[] = $prop_valor;
-        }
-
-        return $retorno;
+        return get_object_vars($this);
     }
 
     /**
@@ -228,13 +212,7 @@ class Struct implements \Serializable
      */
     public function getConst($constante)
     {
-        if ('class' === $constante) {
-            $retorno = static::class;
-        } else {
-            $retorno = constant(get_class($this).'::'.$constante);
-        }
-
-        return $retorno;
+        return 'class' === $constante ? static::class : constant(static::class.'::'.$constante);
     }
 
     /**
@@ -257,6 +235,7 @@ class Struct implements \Serializable
      *
      * @version 1.0
      */
+    #[\Override]
     public function serialize()
     {
         return serialize($this);
@@ -271,10 +250,8 @@ class Struct implements \Serializable
                 if ($valor instanceof \Serializable || method_exists($valor, '__sleep')) {
                     $serializar[$propiedad] = serialize($valor);
                 }
-            } else {
-                if (is_scalar($valor) || is_array($valor) || is_null($valor)) {
-                    $serializar[$propiedad] = $valor;
-                }
+            } elseif (is_scalar($valor) || is_array($valor) || is_null($valor)) {
+                $serializar[$propiedad] = $valor;
             }
         }
 
@@ -291,6 +268,7 @@ class Struct implements \Serializable
      *
      * @param string $serialized estructura serializada
      */
+    #[\Override]
     public function unserialize($serialized): bool
     {
         return unserialize($serialized);
@@ -302,11 +280,7 @@ class Struct implements \Serializable
             if (is_string($valor)) {
                 $serializado = @unserialize($valor);
 
-                if (false === $serializado) {
-                    $this->$propiedad = $valor;
-                } else {
-                    $this->$propiedad = $serializado;
-                }
+                $this->$propiedad = false === $serializado ? $valor : $serializado;
             } else {
                 $this->$propiedad = $valor;
             }

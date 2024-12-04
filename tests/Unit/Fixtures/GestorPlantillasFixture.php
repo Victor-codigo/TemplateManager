@@ -13,8 +13,8 @@ class GestorPlantillasFixture
 
     public static function is_readable(...$args)
     {
-        return !\is_callable(self::$is_readable) ?
-                    \is_readable($args[0]) :
-                    call_user_func_array(self::$is_readable, $args);
+        return \is_callable(self::$is_readable) ?
+                    call_user_func_array(self::$is_readable, $args) :
+                    \is_readable($args[0]);
     }
 }

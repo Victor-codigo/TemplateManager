@@ -36,17 +36,17 @@ class ArrayPath extends ArrayBase
      * @return bool TRUE si se creó con éxito,
      *              FALSE si no se creó
      */
-    public function setPath($path, $value, $separator = '.')
+    public function setPath($path, mixed $value, $separator = '.')
     {
         if ('' === $path) {
-            $this->array = [$value];
+            $this->items = [$value];
 
             return true;
         }
 
         $path_indices = explode($separator, $path);
         $path_indices_count = count($path_indices);
-        $item_actual = &$this->array;
+        $item_actual = &$this->items;
 
         foreach ($path_indices as $count => $indice) {
             if (!isset($item_actual[$indice])) {
@@ -101,7 +101,7 @@ class ArrayPath extends ArrayBase
             return true;
         }
 
-        $contenedor = &$this->array;
+        $contenedor = &$this->items;
         $path_ultimo = $path;
         $encontrado = true;
         $path_array = explode($separator, $path);
@@ -134,7 +134,7 @@ class ArrayPath extends ArrayBase
     public function &getPointer($path, &$encontrado = false, $separator = '.')
     {
         $path_array = explode($separator, $path);
-        $item_actual = &$this->array;
+        $item_actual = &$this->items;
         $encontrado = true;
         $retorno_null = null;
 

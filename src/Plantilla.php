@@ -38,13 +38,6 @@ class Plantilla
     public const URL_SECCION_SEPARADOR = '/';
 
     /**
-     * Gestor al que pertenece la plantilla.
-     *
-     * @var GestorPlantillas
-     */
-    private $gestor;
-
-    /**
      * Path de la plantilla.
      *
      * @var string
@@ -144,9 +137,11 @@ class Plantilla
      * @param GestorPlantillas $gestor gestor de plantillas
      * @param PlantillaConfig  $config Configuración de la plantilla
      */
-    public function __construct(GestorPlantillas $gestor, PlantillaConfig $config)
+    public function __construct(/**
+     * Gestor al que pertenece la plantilla.
+     */
+    private GestorPlantillas $gestor, PlantillaConfig $config)
     {
-        $this->gestor = $gestor;
         $this->setPath($config->path);
         $this->setLangRaiz($config->lang_raiz);
         $this->cargar($config->path);
@@ -249,7 +244,7 @@ class Plantilla
      */
     public function existeData($id)
     {
-        return null === $this->gestor->getData($id) ? false : true;
+        return null !== $this->gestor->getData($id);
     }
 
     /**
@@ -317,6 +312,7 @@ class Plantilla
         }
 
         echo $texto_escapado;
+        return null;
     }
 
     /**
@@ -343,6 +339,7 @@ class Plantilla
         }
 
         echo $data;
+        return null;
     }
 
     /**
@@ -403,7 +400,7 @@ class Plantilla
             $reemplazo[] = '#';
         }
 
-        if (!empty($patron)) {
+        if ($patron !== []) {
             return preg_replace($patron, $reemplazo, $url, 1);
         }
 
@@ -436,6 +433,7 @@ class Plantilla
         }
 
         echo $retorno;
+        return null;
     }
 
     /**
@@ -454,21 +452,11 @@ class Plantilla
         $retorno = '';
 
         if ('' !== $valor) {
-            switch ($tipo) {
-                case TIPODATO::DATA:
-                    $valor = $this->data($valor, true);
-
-                    break;
-
-                case TIPODATO::URL:
-                    $valor = $this->url($valor, [' ' => '-'], self::URL_SECCION_SEPARADOR, true);
-
-                    break;
-
-                default:
-                    $valor = '';
-            }
-
+            $valor = match ($tipo) {
+                TIPODATO::DATA => $this->data($valor, true),
+                TIPODATO::URL => $this->url($valor, [' ' => '-'], self::URL_SECCION_SEPARADOR, true),
+                default => '',
+            };
             $retorno = '' == $valor
                 ? ''
                 : $this->data($atr, true).'="'.trim($valor).'"';
@@ -479,6 +467,7 @@ class Plantilla
         }
 
         echo $retorno;
+        return null;
     }
 
     /**
@@ -523,5 +512,6 @@ class Plantilla
         }
 
         echo $retorno;
+        return null;
     }
 }

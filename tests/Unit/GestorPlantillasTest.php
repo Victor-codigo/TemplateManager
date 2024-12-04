@@ -39,6 +39,7 @@ class GestorPlantillasTest extends TestCase
      */
     private $plantilla_config;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -376,10 +377,8 @@ class GestorPlantillasTest extends TestCase
     {
         if ($provider['expect'] instanceof \Exception) {
             $this->expectException(ExceptionDataCargar::class);
-        } else {
-            if (!$provider['params']['string']) {
-                $this->expectOutputString($provider['mock']['render']);
-            }
+        } elseif (!$provider['params']['string']) {
+            $this->expectOutputString($provider['mock']['render']);
         }
 
         $plantilla_mock = $this

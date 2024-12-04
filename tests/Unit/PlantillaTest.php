@@ -15,10 +15,10 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Tests\comun\PhpunitUtil;
 use Tests\Unit\Fixtures\PlantillaDataMuestra;
 use Tests\Unit\Fixtures\PlantillaFixture;
 use Tests\Unit\Fixtures\PlantillaForTesting;
+use Tests\comun\PhpunitUtil;
 
 use const Tests\PATH_UNIT_FIXTURE;
 
@@ -59,6 +59,7 @@ class PlantillaTest extends TestCase
      */
     private $plantilla_config;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
@@ -85,6 +86,7 @@ class PlantillaTest extends TestCase
         $this->plantilla_data->propiedad_6 = new PlantillaDataMuestra();
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -142,9 +144,7 @@ class PlantillaTest extends TestCase
     {
         $plantilla__path = $this->propertyEdit($this->object, 'path');
 
-        PlantillaFixture::$is_readable = function () use ($provider) {
-            return $provider['mock']['isReadable'];
-        };
+        PlantillaFixture::$is_readable = fn() => $provider['mock']['isReadable'];
 
         if ($provider['mock']['isReadable']) {
             PlantillaFixture::$is_readable = fn (...$args): bool => true;
@@ -181,7 +181,7 @@ class PlantillaTest extends TestCase
         $lang_raiz = 'lang.raiz';
         $this->propertyEdit($this->object, 'lang_raiz', $lang_raiz);
 
-        $resultado = $this->object->getLangRaiz($lang_raiz);
+        $resultado = $this->object->getLangRaiz();
 
         $this->assertEquals(
             $lang_raiz,
@@ -193,7 +193,7 @@ class PlantillaTest extends TestCase
     #[Test]
     public function getCallback()
     {
-        $callback = function () {};
+        $callback = function (): void {};
         $plantillaCallabck = $this->propertyEdit($this->object, 'callback', $callback);
 
         $retorno = $this->object->getCallback();
@@ -262,7 +262,7 @@ class PlantillaTest extends TestCase
         PlantillaFixture::$is_callable = fn (): bool => $provider['mock']['isCallable'];
 
         if ($provider['expect'] instanceof \Exception) {
-            $this->expectException(get_class($provider['expect']));
+            $this->expectException($provider['expect']::class);
         } else {
             $provider['expect'] = require $provider['params']['path'];
         }
@@ -350,11 +350,9 @@ class PlantillaTest extends TestCase
     public function render22($provider)
     {
         if ($provider['expect'] instanceof \Exception) {
-            $this->expectException(get_class($provider['expect']));
-        } else {
-            if (!$provider['params']['string']) {
-                $this->expectOutputString($provider['mock']['callback']);
-            }
+            $this->expectException($provider['expect']::class);
+        } elseif (!$provider['params']['string']) {
+            $this->expectOutputString($provider['mock']['callback']);
         }
 
         $this->gestor_mock
@@ -372,7 +370,7 @@ class PlantillaTest extends TestCase
         $plantilla_mock
             ->expects($this->any())
             ->method('callback')
-            ->willReturnCallback(function () use ($provider) {
+            ->willReturnCallback(function () use ($provider): void {
                 echo $provider['mock']['callback'];
             });
 

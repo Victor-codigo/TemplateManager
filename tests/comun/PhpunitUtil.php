@@ -52,7 +52,7 @@ trait PhpunitUtil
     private function reflectClass($object)
     {
         $encontrado = false;
-        $class_name = get_class($object);
+        $class_name = $object::class;
 
         foreach ($this->reflectClass as $class_reflect) {
             if ($class_reflect->name == $class_name) {
@@ -181,7 +181,7 @@ trait PhpunitUtil
      *
      * @throws Exception
      */
-    protected function propertyEdit($object, $property_name, $value = null, $access = true)
+    protected function propertyEdit($object, $property_name, mixed $value = null, $access = true)
     {
         $property = $this->getProperty(
             $this->reflectClass($object),
@@ -363,13 +363,7 @@ trait PhpunitUtil
     {
         $trazado = debug_backtrace();
 
-        if (null === $indice) {
-            $retorno = $trazado;
-        } else {
-            $retorno = $trazado[$indice];
-        }
-
-        return $retorno;
+        return null === $indice ? $trazado : $trazado[$indice];
     }
 
     /**
@@ -404,7 +398,7 @@ trait PhpunitUtil
      * @param object $objeto   objeto que se comprueba
      * @param string $mensaje  mensaje de error
      */
-    public function assertObjectAttributeValue($atributo, $valor, $objeto, $mensaje = '')
+    public function assertObjectAttributeValue($atributo, mixed $valor, $objeto, $mensaje = '')
     {
         $this->assertObjectHasAttribute(
             $atributo,
@@ -448,7 +442,7 @@ trait PhpunitUtil
      * @param mixed  $object   objeto que se comprueba
      * @param string $mensaje  mensaje de error
      */
-    public function assertArrayHasInstanceOf(array $expected, $object, $mensaje = '')
+    public function assertArrayHasInstanceOf(array $expected, mixed $object, $mensaje = '')
     {
         $assert_ok = false;
         foreach ($expected as $instancia) {

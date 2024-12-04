@@ -16,7 +16,7 @@ abstract class Enum
      */
     private static function getReflexion()
     {
-        return new \ReflectionClass(get_called_class());
+        return new \ReflectionClass(static::class);
     }
 
     /**
@@ -78,7 +78,7 @@ abstract class Enum
      */
     public static function hasConstant($value, $strict = false)
     {
-        foreach (static::getConstants() as $const => $const_value) {
+        foreach (static::getConstants() as $const_value) {
             if ($strict && $const_value === $value) {
                 return true;
             } elseif (!$strict && $const_value == $value) {

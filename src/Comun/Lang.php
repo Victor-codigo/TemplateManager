@@ -200,9 +200,7 @@ class Lang
      */
     public function cargar($path, $path_var = null, $separador = self::SEPARADOR)
     {
-        $path_var = null === $path_var
-            ? str_replace(['\\', '/'], $separador, $path)
-            : $path_var;
+        $path_var ??= str_replace(['\\', '/'], $separador, $path);
 
         $archivo = $this->lang_path.'/'.$this->langs[$this->lang]
                     .'/'.$path.self::ARCHIVO_EXTENSION;
@@ -346,13 +344,13 @@ class Lang
      */
     public function replace($valor, array $sustitucion = [], $marca = ':', $escape = '\\')
     {
-        if (!empty($sustitucion)) {
+        if ($sustitucion !== []) {
             $patron = [];
 
             $marca = preg_quote($marca, '/');
             $escape = preg_quote($escape, '/');
 
-            foreach ($sustitucion as $sustitucionNombre => $_) {
+            foreach (array_keys($sustitucion) as $sustitucionNombre) {
                 $patron[] = '/(?<![^'.$escape.']'.$escape.')'.$marca.preg_quote($sustitucionNombre).'/uis';
             }
 

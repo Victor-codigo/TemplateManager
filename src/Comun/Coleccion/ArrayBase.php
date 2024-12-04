@@ -8,22 +8,14 @@ namespace Lib\Comun\Coleccion;
 abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
 {
     /**
-     * Array.
-     *
-     * @var array
-     */
-    protected $array = [];
-
-    /**
      * Constructor.
      *
      * @version 1.0
      *
      * @param array $items elementos del array
      */
-    public function __construct(array $items = [])
+    public function __construct(protected array $items = [])
     {
-        $this->array = $items;
     }
 
     /**
@@ -41,9 +33,10 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      *
      * @version 1.0
      */
+    #[\Override]
     public function count(): int
     {
-        return count($this->array);
+        return count($this->items);
     }
 
     /**
@@ -54,9 +47,10 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      * @return mixed|false valor
      *                     FALSE si está vacío o ha alcanzado el final
      */
+    #[\Override]
     public function current(): mixed
     {
-        return current($this->array);
+        return current($this->items);
     }
 
     /**
@@ -67,9 +61,10 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      * @return int|null indice actual
      *                  NULL si está vacío o ha alcanzado el final
      */
+    #[\Override]
     public function key(): mixed
     {
-        return key($this->array);
+        return key($this->items);
     }
 
     /**
@@ -77,9 +72,10 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      *
      * @version 1.0
      */
+    #[\Override]
     public function next(): void
     {
-        next($this->array);
+        next($this->items);
     }
 
     /**
@@ -87,9 +83,10 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      *
      * @version 1.0
      */
+    #[\Override]
     public function rewind(): void
     {
-        reset($this->array);
+        reset($this->items);
     }
 
     /**
@@ -100,9 +97,10 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      * @return bool TRUE si el indice interno es válido
      *              FALSE si no lo es
      */
+    #[\Override]
     public function valid(): bool
     {
-        return false === current($this->array) ? false : true;
+        return false !== current($this->items);
     }
 
     /**
@@ -112,11 +110,11 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      */
     public function clear()
     {
-        foreach ($this->array as &$item) {
+        foreach ($this->items as &$item) {
             $item = null;
         }
 
-        $this->array = [];
+        $this->items = [];
     }
 
     /**
@@ -129,7 +127,7 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      */
     public function isEmpty()
     {
-        return empty($this->array);
+        return $this->items === [];
     }
 
     /**
@@ -141,7 +139,7 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      */
     public function getItems()
     {
-        return $this->array;
+        return $this->items;
     }
 
     /**
@@ -153,7 +151,7 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      */
     public function &getItemsRef()
     {
-        return $this->array;
+        return $this->items;
     }
 
     /**
@@ -161,18 +159,18 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      *
      * @version 1.0
      *
-     * @param mixed      $item elemento que se añade
-     * @param int|string $id   identificador del elemento
+     * @param mixed $item elemento que se añade
+     * @param int|string|null $id identificador del elemento
      */
-    public function push($item, $id = null)
+    public function push(mixed $item, $id = null)
     {
         if (is_string($id) || is_numeric($id)) {
-            $this->array[$id] = $item;
+            $this->items[$id] = $item;
 
             return;
         }
 
-        $this->array[] = $item;
+        $this->items[] = $item;
     }
 
     /**
@@ -215,7 +213,7 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      */
     public function fillFromArrayRef(array &$array)
     {
-        $this->array = &$array;
+        $this->items = &$array;
     }
 
     /**
@@ -232,8 +230,8 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
     {
         $retorno = null;
 
-        if (isset($this->array[$index])) {
-            $retorno = $this->array[$index];
+        if (isset($this->items[$index])) {
+            $retorno = $this->items[$index];
         }
 
         return $retorno;
@@ -247,8 +245,9 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      * @return string|false array en JSON
      *                      FALSE Si se produce un error
      */
+    #[\Override]
     public function jsonSerialize(): mixed
     {
-        return json_encode($this->array);
+        return json_encode($this->items);
     }
 }

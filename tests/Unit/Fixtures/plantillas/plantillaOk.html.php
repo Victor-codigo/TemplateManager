@@ -3,7 +3,7 @@
 use Lib\Plantilla;
 use Lib\PlantillaData;
 
-return function (PlantillaData $data, Plantilla $plt) { ?>
+return function (PlantillaData $data, Plantilla $plt): void { ?>
 
 <div>
     Plantilla de prueba

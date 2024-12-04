@@ -17,5 +17,5 @@ final class PlantillaDataMuestra extends PlantillaData
     public $propiedad_3 = false;
     public $propiedad_4;
     public $propiedad_5 = [1, 2, 3];
-    public ?PlantillaDataMuestra $propiedad_6;
+    public ?PlantillaDataMuestra $propiedad_6 = null;
 }
