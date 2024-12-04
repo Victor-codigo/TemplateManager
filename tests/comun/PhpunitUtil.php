@@ -47,12 +47,12 @@ trait PhpunitUtil
      *
      * @param object $object objeto que se reflecta
      *
-     * @return \ReflectionClass|null clase reflectada
      */
-    private function reflectClass($object)
+    private function reflectClass($object):\ReflectionClass|null
     {
         $encontrado = false;
         $class_name = $object::class;
+        $reflect_class = null;
 
         foreach ($this->reflectClass as $class_reflect) {
             if ($class_reflect->name == $class_name) {

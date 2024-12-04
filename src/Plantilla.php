@@ -208,6 +208,7 @@ class Plantilla
             }
         }
 
+        // @phpstan-ignore method.notFound
         $this->callback($data, $this);
 
         return $string ? ob_get_clean() : ob_end_flush();
