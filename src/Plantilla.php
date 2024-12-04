@@ -198,7 +198,7 @@ class Plantilla
      *                     TRUE si se ejecuta correctamente.
      *                     FALSE si se produce un error
      */
-    public function render($data, $string = false)
+    public function render($data, $string = false): string|bool
     {
         ob_start();
 
@@ -385,7 +385,7 @@ class Plantilla
      *
      * @return string url corregida
      */
-    private function urlEspaceHttpYSharp(string $url)
+    private function urlEspaceHttpYSharp(string $url): string|array|null
     {
         $patron = [];
         $reemplazo = [];
