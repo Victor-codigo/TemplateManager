@@ -36,10 +36,8 @@ class GestorPlantillasTest extends TestCase
 
     /**
      * Configuración de la plantilla.
-     *
-     * @var PlantillaConfig
      */
-    private $plantilla_config;
+    private PlantillaConfig $plantilla_config;
 
     #[\Override]
     protected function setUp(): void
