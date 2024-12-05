@@ -200,11 +200,11 @@ trait PhpunitUtil
      *
      * @version 1.0
      *
-     * @param string $object objeto que se reflecta
+     * @param object $object objeto que se reflecta
      * @param string $method nombre del método
      *
      */
-    protected function setMethodPublic($object, $method):ReflectionMethod
+    protected function setMethodPublic(object $object, string $method):ReflectionMethod
     {
         return $this->getMethod(
             $this->reflectClass($object),

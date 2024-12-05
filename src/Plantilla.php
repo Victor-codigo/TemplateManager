@@ -375,6 +375,7 @@ class Plantilla
      *
      * @return string|array|null url corregida
      */
+    // @phpstan-ignore return.unusedType
     private function urlEspaceHttpYSharp(string $url): string|array|null
     {
         $patron = [];
