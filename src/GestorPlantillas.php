@@ -96,9 +96,8 @@ class GestorPlantillas
     /**
      * idioma.
      *
-     * @var Lang
      */
-    private $lang;
+    private ?Lang $lang;
 
     /**
      * Obtiene la clase de idioma.

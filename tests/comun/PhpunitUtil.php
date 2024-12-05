@@ -14,9 +14,10 @@ use Tests\comun\Exceptions\GetPropertyException;
 trait PhpunitUtil
 {
     /**
-     * @var \ReflectionClass
+     *
+     * @var \ReflectionClass[]
      */
-    private $reflectClass = [];
+    private array $reflectClass = [];
 
     /**
      * Obtiene la clase que ha sido reflectada.

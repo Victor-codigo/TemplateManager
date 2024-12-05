@@ -235,12 +235,15 @@ class GestorPlantillasTest extends TestCase
     #[Test]
     public function getLang(): void
     {
-        $this->propertyEdit($this->object, 'lang', 'lang');
+        $lang = new Lang();
+        $lang->setLangs(['lang' => 'lang']);
+        $lang->setLang('lang');
+        $this->propertyEdit($this->object, 'lang',$lang);
         $resultado = $this->object->getLang();
 
         $this->assertEquals(
             'lang',
-            $resultado,
+            $resultado->getLang(),
             'ERROR:el valor devuelto no es el esperado'
         );
     }

@@ -98,7 +98,7 @@ class Lang
      *
      * @param int|string $lang identificador del idioma a cargar
      */
-    public function setLang($lang): void
+    public function setLang(int|string $lang): void
     {
         if (array_key_exists($lang, $this->langs)) {
             $this->lang = $lang;

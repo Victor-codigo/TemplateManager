@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lib;
 
+use Closure;
 use Lib\Comun\Call;
 use Lib\Exception\ExceptionDataCargar;
 use Lib\Exception\ExceptionPlantillaCargar;
@@ -108,9 +109,8 @@ class Plantilla
      *  - PlantillaData, información que se l pasa a la estructura
      *  - Plantilla, plantilla.
      *
-     * @var callable
      */
-    private $callback;
+    private ?Closure $callback;
 
     /**
      * Obtiene la función de la plantilla.
@@ -280,12 +280,10 @@ class Plantilla
      * @param array<string, string> $sustitucion con los place-holders a sustituir. Con el siguiente formato:
      *                                           - arr[place-holder sin marcador] = string, reemplazo
      * @param string                $marca       caracteres que se utilizan para marcar el place-holder
-     * @param bool                  $string      TRUE si devuelve un string
-     *                                           FALSE si se muestra por pantalla
      *
      * @return string con los valores escapados
      */
-    public function langHtml(string $path, array $sustitucion = [], $marca = ':', $string = false)
+    public function langHtml(string $path, array $sustitucion = [], $marca = ':'):string
     {
         $lang = $this->gestor->getLang();
         $valor = $lang->get(
@@ -303,12 +301,8 @@ class Plantilla
             '\\'
         );
 
-        if ($string) {
             return $texto_escapado;
-        }
 
-        echo $texto_escapado;
-        return null;
     }
 
     /**

@@ -959,7 +959,7 @@ class PlantillaTest extends TestCase
             ->with($lang_raiz.$path, [], '.', $marca, '\\')
             ->willReturn($get_expect);
 
-        $resultado = $this->object->langHtml($path, $sustitucion, $marca, true);
+        $resultado = $this->object->langHtml($path, $sustitucion, $marca);
 
         $this->assertEquals(
             $expect,
@@ -989,7 +989,7 @@ class PlantillaTest extends TestCase
             ->with($lang_raiz.$path, [], '.', $marca, '\\')
             ->willReturn($get_expect);
 
-        $resultado = $this->object->langHtml($path, $sustitucion, $marca, true);
+        $resultado = $this->object->langHtml($path, $sustitucion, $marca);
 
         $this->assertEquals(
             $expect,
@@ -998,28 +998,5 @@ class PlantillaTest extends TestCase
         );
     }
 
-    #[Test]
-    public function langHtml__Echo(): void
-    {
-        $path = 'path.a.la.ruta.del.idioma';
-        $sustitucion = ['SUSTITUIR' => '<a href="#link">link</a>'];
-        $marca = ':';
-        $get_expect = 'idioma :SUSTITUIR';
-        $expect = 'idioma <a href="#link">link</a>';
-        $lang_raiz = $this->plantilla_config->lang_raiz.'.';
 
-        $this->gestor_mock
-            ->expects($this->once())
-            ->method('getLang')
-            ->willReturn($this->lang);
-
-        $this->lang
-            ->expects($this->once())
-            ->method('get')
-            ->with($lang_raiz.$path, [], '.', $marca, '\\')
-            ->willReturn($get_expect);
-
-        $this->expectOutputString($expect);
-        $this->object->langHtml($path, $sustitucion, $marca, false);
-    }
 }
