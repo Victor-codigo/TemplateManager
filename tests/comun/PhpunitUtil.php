@@ -221,51 +221,7 @@ trait PhpunitUtil
 
 
 
-    /**
-     * Testea el destructor de la clase.
-     *
-     * @version 1.0
-     *
-     * @param object $object objeto que se testea
-     * @param bool   $static TRUE si se comprueban las propiedades estáticas
-     */
-    protected function destructorTest($object, $static = true)
-    {
-        $reflection = new \ReflectionClass($object);
-        $parents = $this->getParents($reflection);
-        array_unshift($parents, $reflection);
 
-        $object->__destruct();
-
-        foreach ($parents as $class) {
-            /* @var $property ReflectionProperty */
-            foreach ($class->getProperties() as $property) {
-                $property->setAccessible(true);
-                $value = $property->getValue($class);
-
-                if (\is_callable($value)
-                || (!\is_scalar($value) && !\is_null($value) && !\is_array($value))) {
-                    $this->assertNull(
-                        $value,
-                        'ERROR Destructor:  la propiedad: '.$property->getName().'. No ha sido destruida'
-                    );
-                }
-            }
-
-            if ($static) {
-                /* @var $property ReflectionProperty */
-                foreach ($class->getStaticProperties() as $property => $value) {
-                    if (\is_callable($value)
-                    || (!\is_scalar($value) && !\is_null($value) && !\is_array($value))) {
-                        $this->assertNull(
-                            $value,
-                            'ERROR Destructor:  la propiedad: '.$property.'. No ha sido destruida'
-                        );
-                    }
-                }
-            }
-        }
-    }
 
     /**
      * Realiza un trazado de las llamadas a funciones.

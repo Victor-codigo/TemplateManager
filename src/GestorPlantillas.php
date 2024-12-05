@@ -21,13 +21,13 @@ class GestorPlantillas
      *
      * @version 1.0
      *
-     * @param string $path path de la plantilla
+     * @param string|null $path path de la plantilla
      *
      * @return Plantilla|Plantilla[]|null plantilla con el path pasado
      *                                    Plantillas si no se pasa $path
      *                                    NULL si no se encuentra el path
      */
-    public function getPlantilla($path)
+    public function getPlantilla(?string $path):Plantilla|array|null
     {
         $retorno = null;
 

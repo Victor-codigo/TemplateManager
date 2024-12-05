@@ -373,7 +373,7 @@ class Plantilla
      *
      * @param string $url URL escapada
      *
-     * @return string url corregida
+     * @return string|array|null url corregida
      */
     private function urlEspaceHttpYSharp(string $url): string|array|null
     {
