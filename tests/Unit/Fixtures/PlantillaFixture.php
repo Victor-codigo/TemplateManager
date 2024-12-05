@@ -7,14 +7,14 @@ namespace Lib;
 use Tests\Unit\Fixtures\PlantillaFixture;
 
 
-function is_readable(string $filename)
+function is_readable(string $filename):bool
 {
     return \is_callable(PlantillaFixture::$is_readable)
         ? (PlantillaFixture::$is_readable)($filename)
         : \is_readable($filename);
 }
 
-function is_callable(mixed $value, bool $syntax_only, &$callable_name): bool
+function is_callable(mixed $value, bool $syntax_only, string &$callable_name): bool
 {
     return \is_callable(PlantillaFixture::$is_callable)
         ? (PlantillaFixture::$is_callable)($value, $syntax_only, $callable_name)

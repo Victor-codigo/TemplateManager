@@ -169,6 +169,7 @@ class Plantilla
         if (is_readable($path)) {
             $plantilla = require $path;
 
+            $callable_name='';
             if (is_callable($plantilla, false, $callable_name)) {
                 $this->callback = $plantilla;
             } else {
@@ -250,7 +251,7 @@ class Plantilla
      * @version 1.0
      *
      * @param string $path        path de la variable
-     * @param array   $sustitucion con los place-holders a sustituir. Con el siguiente formato:
+     * @param array<string|int, string>   $sustitucion con los place-holders a sustituir. Con el siguiente formato:
      *                            - arr[place-holder sin marcador] = string, reemplazo
      * @param string $marca       caracteres que se utilizan para marcar el place-holder
      * @param bool   $string      TRUE si devuelve un string
@@ -338,7 +339,7 @@ class Plantilla
      * @version 1.1
      *
      * @param string $url              URL a escapar
-     * @param array  $sustitucion      caracteres que se sustituyen en cada una de las partes
+     * @param array<string, string>  $sustitucion      caracteres que se sustituyen en cada una de las partes
      *                                 de la URL, con el siguiente formato:
      *                                 - arr[carácter a sustituir] = string, carácter sustituido
      * @param string $seccionSeparador carácter separador de las secciones de la URL
@@ -373,7 +374,7 @@ class Plantilla
      *
      * @param string $url URL escapada
      *
-     * @return string|array|null url corregida
+     * @return string|string[]|null url corregida
      */
     // @phpstan-ignore return.unusedType
     private function urlEspaceHttpYSharp(string $url): string|array|null
@@ -467,7 +468,7 @@ class Plantilla
      *
      * @version 1.0
      *
-     * @param array  $array     con los elementos
+     * @param string[]  $array     con los elementos
      * @param int   $modo      establece el modo en el que se concatenen los elementos
      * @param string $separador string con el que se separan los elementos
      * @param bool   $string    TRUE si devuelve un string

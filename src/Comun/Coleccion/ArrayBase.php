@@ -6,6 +6,8 @@ namespace Lib\Comun\Coleccion;
 
 /**
  * Crea una clase base para extender la funcionalidad del array.
+ *
+ * @implements \Iterator<object>
  */
 abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
 {
@@ -14,7 +16,7 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      *
      * @version 1.0
      *
-     * @param array $items elementos del array
+     * @param object[] $items elementos del array
      */
     public function __construct(protected array $items = [])
     {
@@ -192,7 +194,7 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      *
      * @version 1.0
      *
-     * @param array $array    desde el que se cargan los datos
+     * @param object[] $array    desde el que se cargan los datos
      * @param bool  $set_keys TRUE si se añaden los identificadores de los items
      *                        FALSE no se añaden
      */
@@ -211,7 +213,7 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      *
      * @version 1.0
      *
-     * @param array $array del que se copia la referencia
+     * @param object[] $array del que se copia la referencia
      */
     public function fillFromArrayRef(array &$array): void
     {

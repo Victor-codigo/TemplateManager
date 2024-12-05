@@ -12,10 +12,14 @@ final class PlantillaDataMuestra extends PlantillaData
 {
     public const string PATH = PATH_UNIT_FIXTURE.'/plantillas/plantillaOk.html.php';
 
-    public $propiedad_1 = 1;
-    public $propiedad_2 = 'hola';
-    public $propiedad_3 = false;
-    public $propiedad_4;
-    public $propiedad_5 = [1, 2, 3];
+    public int|string $propiedad_1 = 1;
+    public string $propiedad_2 = 'hola';
+    public bool $propiedad_3 = false;
+    public mixed $propiedad_4;
+    /**
+     *
+     * @var int[]|null
+     */
+    public ?array $propiedad_5 = [1, 2, 3];
     public ?PlantillaDataMuestra $propiedad_6 = null;
 }

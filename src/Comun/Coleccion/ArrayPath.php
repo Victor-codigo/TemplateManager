@@ -6,6 +6,7 @@ namespace Lib\Comun\Coleccion;
 
 /**
  * Array al que se le pueden modificar los items a través de un path.
+ *
  */
 class ArrayPath extends ArrayBase
 {
@@ -133,7 +134,7 @@ class ArrayPath extends ArrayBase
      *
      * @return resource|null NULL si no se encuentra
      */
-    public function &getPointer($path, &$encontrado = false, $separator = '.')
+    public function &getPointer(string $path, bool &$encontrado = false, string $separator = '.')
     {
         $path_array = explode($separator, $path);
         $item_actual = &$this->items;

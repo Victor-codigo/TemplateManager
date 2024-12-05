@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Lib\Comun;
 
+use Lib\Comun\Coleccion\ArrayBase;
 use Lib\Comun\Coleccion\ArrayPath;
 
 /**
@@ -51,6 +52,8 @@ class Lang
      * - arr[identificador del idioma] = string, path de la carpeta de idioma
      *                                          relativo al la carpeta donde se
      *                                          guardan los idiomas.
+     *
+     * @var array<string, string>
      */
     private array $langs = [];
 
@@ -59,7 +62,7 @@ class Lang
      *
      * @version 1.0
      *
-     * @param array $langs con los idiomas validos, con el siguiente formato
+     * @param string[] $langs con los idiomas validos, con el siguiente formato
      *                     - arr[identificador del idioma] = string, path de la carpeta de idioma
      *                     relativo al la carpeta donde se
      *                     guardan los idiomas
@@ -74,7 +77,7 @@ class Lang
      *
      * @version 1.0
      *
-     * @return array con el siguiente formato:
+     * @return string[] con el siguiente formato:
      *               - arr[identificador del idioma] = string, path de la carpeta de idioma
      *               relativo al la carpeta donde se
      *               guardan los idiomas
@@ -153,6 +156,8 @@ class Lang
     /**
      * Array con las variables de los idiomas ordenados por grupos. Con el siguiente
      * formato: arr[nombre del grupo] = array, variables del grupo.
+     *
+     * @var ArrayPath<object>|null
      */
     private ?ArrayPath $lang_vars = null;
 
@@ -228,7 +233,7 @@ class Lang
      * @version 1.0
      *
      * @param string $path        path a la variable
-     * @param array  $sustitucion con los place-holders a sustituir. Con el siguiente formato:
+     * @param array<string|int, string>  $sustitucion con los place-holders a sustituir. Con el siguiente formato:
      *                            - arr[place-holder sin marcador] = string, reemplazo
      * @param string $separador   carácter que se usa para las carpetas y los indices de los
      *                            array dentro del archivo
@@ -238,7 +243,7 @@ class Lang
      * @return string|string[]|null Devuelve el valor de la variable
      *                              NULL si no se encuentra devuelve
      */
-    public function get($path, $sustitucion = [], $separador = self::SEPARADOR, $marca = ':', $escape = '\\')
+    public function get(string $path, array $sustitucion = [], string $separador = self::SEPARADOR, string $marca = ':', string $escape = '\\')
     {
         $retorno = $this->lang_vars->getPath($path, $encontrado, $separador);
 
@@ -287,7 +292,7 @@ class Lang
      * @param string $path_destino path de destino
      * @param string $marca        carácter que separa los niveles del path
      */
-    public function copy($path_origen, $path_destino, $marca = self::SEPARADOR)
+    public function copy(string $path_origen, string $path_destino, string $marca = self::SEPARADOR):bool
     {
         $vars_origen = $this->lang_vars->getPath($path_origen, $retorno, $marca);
 
@@ -328,14 +333,14 @@ class Lang
      * @version 1.0
      *
      * @param string $valor       valor que se reemplaza
-     * @param array  $sustitucion con los place-holders a sustituir. Con el siguiente formato:
+     * @param array<string|int, string>  $sustitucion con los place-holders a sustituir. Con el siguiente formato:
      *                            - arr[place-holder sin marcador] = string, reemplazo
      * @param string $marca       caracteres que se utilizan para marcar el place-holder
      * @param string $escape      Carácter que se utiliza de escape para la marca place-holder
      *
      * @return string string con los place-holders reemplazados
      */
-    public function replace($valor, array $sustitucion = [], $marca = ':', $escape = '\\')
+    public function replace(string $valor, array $sustitucion = [], string $marca = ':', string $escape = '\\')
     {
         if ($sustitucion !== []) {
             $patron = [];

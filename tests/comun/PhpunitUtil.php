@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\comun;
 
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\MockObject\Stub\Stub;
+use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
 use Tests\comun\Exceptions\GetMethodException;
@@ -14,8 +13,7 @@ use Tests\comun\Exceptions\GetPropertyException;
 trait PhpunitUtil
 {
     /**
-     *
-     * @var \ReflectionClass[]
+     * @var ReflectionClass<object>[]
      */
     private array $reflectClass = [];
 
@@ -26,9 +24,9 @@ trait PhpunitUtil
      *
      * @param string $class nombre de la clase
      *
-     * @return \ReflectionClass clase reflectada
+     * @return ReflectionClass<object> clase reflectada
      */
-    protected function getReflectedClass($class)
+    protected function getReflectedClass($class) :ReflectionClass
     {
         $retorno = null;
 
@@ -50,6 +48,7 @@ trait PhpunitUtil
      *
      * @param object $object objeto que se reflecta
      *
+     * @return ReflectionClass<object>|null
      */
     private function reflectClass($object):\ReflectionClass|null
     {
@@ -79,11 +78,11 @@ trait PhpunitUtil
      *
      * @version 1.0
      *
-     * @param \ReflectionClass $class clase para la que se buscan los parientes
+     * @param \ReflectionClass<object> $class clase para la que se buscan los parientes
      * @param string           $until nombre completo de la clase en la que se detiene,
      *                                la búsqueda de parientes
      *
-     * @return \ReflectionClass[] clases parientes
+     * @return \ReflectionClass<object>[] clases parientes
      */
     private function getParents(\ReflectionClass $class, $until = null): array
     {
@@ -106,7 +105,7 @@ trait PhpunitUtil
      *
      * @version 1.0
      *
-     * @param \ReflectionClass $class  clase en la que se busca la propiedad
+     * @param \ReflectionClass<object> $class  clase en la que se busca la propiedad
      * @param string           $name   nombre de la propiedad
      * @param bool             $access TRUE si la propiedad se hace publica, FALSE si no
      *
@@ -139,7 +138,7 @@ trait PhpunitUtil
      *
      * @version 1.0
      *
-     * @param \ReflectionClass $class  clase en la que se busca el método
+     * @param \ReflectionClass<object> $class  clase en la que se busca el método
      * @param string           $name   nombre del método
      * @param bool             $access TRUE si la propiedad se hace publica, FALSE si no
      *
@@ -230,7 +229,7 @@ trait PhpunitUtil
      *
      * @param int $indice indice del trazado que se devuelve. NULL se devuelve todo
      *
-     * @return array todo el trazado o parte del trazado
+     * @return mixed[] todo el trazado o parte del trazado
      */
     public static function getCallerInfo($indice = null): array
     {
@@ -246,7 +245,7 @@ trait PhpunitUtil
      * @version 1.0
      *
      * @param string $atributo nombre de la propiedad
-     * @param array  $array    array de objetos
+     * @param object[]  $array    array de objetos
      * @param string $mensaje  mensaje de error
      */
     public function assertArrayObjectHasAttribute($atributo, array $array, string $mensaje = ''): void
@@ -272,7 +271,7 @@ trait PhpunitUtil
      * @param object $objeto   objeto que se comprueba
      * @param string $mensaje  mensaje de error
      */
-    public function assertObjectAttributeValue($atributo, mixed $valor, $objeto, string $mensaje = ''): void
+    public function assertObjectAttributeValue(string $atributo, mixed $valor, $objeto, string $mensaje = ''): void
     {
         // @phpstan-ignore method.notFound
         $this->assertObjectHasAttribute(
@@ -294,10 +293,10 @@ trait PhpunitUtil
      * @version 1.0
      *
      * @param string $expected nombre completo de la clase
-     * @param array  $array    array a comprobar
+     * @param mixed[]  $array    array a comprobar
      * @param string $mensaje  mensaje de error
      */
-    public function assertArrayInstancesOf($expected, array $array, string $mensaje = ''): void
+    public function assertArrayInstancesOf(string $expected, array $array, string $mensaje = ''): void
     {
         foreach ($array as $indice => $objeto) {
             $this->assertInstanceOf(
@@ -313,7 +312,7 @@ trait PhpunitUtil
      *
      * @version 1.0
      *
-     * @param array  $expected tipos de objetos válidos
+     * @param string[]  $expected tipos de objetos válidos
      * @param mixed  $object   objeto que se comprueba
      * @param string $mensaje  mensaje de error
      */

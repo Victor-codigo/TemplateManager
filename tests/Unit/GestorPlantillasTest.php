@@ -75,6 +75,18 @@ class GestorPlantillasTest extends TestCase
         $this->propertyEdit($this->object, 'plantillas_data', $this->plantillas_data);
     }
 
+    /**
+     *
+     * @return array<int,
+     *  array<int,
+     *      array{
+     *          params: array{
+     *              path: string|null,
+     *          },
+     *          expect: string|null,
+     *      }
+     * >>
+     */
     public static function providerGetPlantilla(): array
     {
         return [
@@ -110,6 +122,15 @@ class GestorPlantillasTest extends TestCase
         ];
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      path: string|null,
+     *  },
+     *  expect: string|null,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerGetPlantilla')]
     public function getPlantilla(array $provider): void
@@ -140,6 +161,18 @@ class GestorPlantillasTest extends TestCase
         }
     }
 
+    /**
+     *
+     * @return array<int,
+     *  array<int,
+     *      array{
+     *          params: array{
+     *              id: string|null,
+     *          },
+     *          expect: string|null,
+     *      }
+     * >>
+     */
     public static function providerGetData(): array
     {
         return [
@@ -175,6 +208,15 @@ class GestorPlantillasTest extends TestCase
         ];
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      id: string|null,
+     *  },
+     *  expect: string|null,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerGetData')]
     public function getData(array $provider): void
@@ -313,6 +355,22 @@ class GestorPlantillasTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @return array<int,
+     *  array<int,
+     *      array{
+     *          params: array{
+     *              data: string,
+     *              string: bool,
+     *          },
+     *          mock: array{
+     *              render: string,
+     *          },
+     *          expect: \Exception|string|bool,
+     *      }
+     * >>
+     */
     public static function providerRenderPlantilla(): array
     {
         return [
@@ -374,6 +432,19 @@ class GestorPlantillasTest extends TestCase
         ];
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      data: string,
+     *      string: bool,
+     *  },
+     *  mock: array{
+     *      render: string,
+     *  },
+     *  expect: \Exception|string|bool,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerRenderPlantilla')]
     public function testRenderPlantilla(array $provider): void

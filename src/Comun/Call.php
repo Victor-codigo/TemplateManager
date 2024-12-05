@@ -17,11 +17,11 @@ trait Call
      *
      * @deprecated Solo para versiones de PHP inferiores a la 7.0
      *
-     * @param array $argumentos argumentos que se le pasan a la función
+     * @param mixed[] $argumentos argumentos que se le pasan a la función
      *
      * @return mixed valor devuelto por la función
      */
-    public function __call(string $funcion, $argumentos)
+    public function __call(string $funcion, array $argumentos)
     {
         $retorno = null;
 

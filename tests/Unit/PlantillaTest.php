@@ -108,6 +108,19 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @return array<int,
+     *  array<int,
+     *      array{
+     *          params: array{
+     *              path: string
+     *          },
+     *          mock: array{
+     *              isReadable: bool,
+     *          }
+     *  }>>
+     */
     public static function providerSetPath(): array
     {
         return [
@@ -137,6 +150,17 @@ class PlantillaTest extends TestCase
         ];
     }
 
+    /**
+     *
+     * @param array{
+     *          params: array{
+     *              path: string
+     *          },
+     *          mock: array{
+     *              isReadable: bool,
+     *          }
+     *  } $provider
+     */
     #[Test]
     #[DataProvider('providerSetPath')]
     public function setPath(array $provider): void
@@ -204,6 +228,22 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @return array<int,
+     *      array<int,
+     *          array{
+     *              params: array{
+     *                  path: string,
+     *              },
+     *              mock: array{
+     *                  isReadable: bool,
+     *                  isCallable: bool,
+     *              },
+     *             expect: ExceptionPlantillaCargar,
+     *         }
+     * >>
+     */
     public static function providerCargar(): array
     {
         return [
@@ -251,6 +291,20 @@ class PlantillaTest extends TestCase
         ];
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      path: string,
+     *  },
+     *  mock: array{
+     *      isReadable: bool,
+     *      isCallable: bool,
+     *  },
+     *  expect: ExceptionPlantillaCargar|bool,
+     * } $provider
+     * @return void
+     */
     #[Test]
     #[DataProvider('providerCargar')]
     public function cargar(array $provider): void
@@ -279,6 +333,23 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @return array<int,
+     *  array<int,
+     *      array{
+     *          params: array{
+     *              data: string,
+     *              string: bool,
+     *          },
+     *          mock: array{
+     *              getData: PlantillaDataMuestra|null,
+     *              callback: string,
+     *          },
+     *          expect: ExceptionDataCargar|string|bool,
+     *     }
+     *  >>
+     */
     public static function providerRender(): array
     {
         return [
@@ -344,6 +415,21 @@ class PlantillaTest extends TestCase
         ];
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      data: string,
+     *      string: bool,
+     *  },
+     *  mock: array{
+     *      getData: PlantillaDataMuestra|null,
+     *      callback: string,
+     *  },
+     *  expect: ExceptionDataCargar|string|bool,
+     * } $provider
+     * @return void
+     */
     #[Test]
     #[DataProvider('providerRender')]
     public function render(array $provider): void
@@ -402,6 +488,21 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @return array<int,
+     *  array<int,
+     *      array{
+     *          params: array{
+     *          id: string,
+     *          },
+     *          mock: array{
+     *              getData: PlantillaDataMuestra|null,
+     *          },
+     *          expect: bool,
+     *     }
+     * >>
+     */
     public static function providerExistedata(): array
     {
         return [
@@ -433,6 +534,18 @@ class PlantillaTest extends TestCase
         ];
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      id: string,
+     *  },
+     *  mock: array{
+     *      getData: PlantillaDataMuestra|null,
+     *  },
+     *  expect: bool,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerExistedata')]
     public function existeData(array $provider): void
@@ -452,6 +565,18 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @return array<int,
+     *  array<int,
+     *      array{
+     *          params: array{
+     *              valores: string,
+     *          },
+     *          expect: string,
+     *     }
+     * >>
+     */
     public static function providerData(): array
     {
         return [
@@ -487,6 +612,15 @@ class PlantillaTest extends TestCase
         ];
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      valores: string,
+     *  },
+     *  expect: string,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerData')]
     public function data__devuelve_string(array $provider): void
@@ -500,6 +634,15 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      valores: string,
+     *  },
+     *  expect: string,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerData')]
     public function data__echo(array $provider): void
@@ -509,6 +652,20 @@ class PlantillaTest extends TestCase
         $this->object->data($provider['params']['valores'], false);
     }
 
+    /**
+     *
+     * @return array<int,
+     *  array<int,
+     *      array{
+     *          params: array{
+     *              url: string,
+     *              sustitucion: array<string, string>,
+     *              seccion_separador: string,
+     *          },
+     *          expect: string,
+     *      }
+     * >>
+     */
     public static function providerUrl(): array
     {
         return [
@@ -624,8 +781,15 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     * @covers \GT\Libs\Sistema\Plantilla\Plantilla::url
-     * @covers \GT\Libs\Sistema\Plantilla\Plantilla::urlEspaceHttpYSharp
+     *
+     * @param array{
+     *  params: array{
+     *      url: string,
+     *      sustitucion: array<string, string>,
+     *      seccion_separador: string,
+     *  },
+     *  expect: string,
+     * } $provider
      */
     #[DataProvider('providerUrl')]
     public function testUrlDevuelveString(array $provider): void
@@ -644,6 +808,17 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      url: string,
+     *      sustitucion: array<string, string>,
+     *      seccion_separador: string,
+     *  },
+     *  expect: string,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerUrl')]
     public function url__echo(array $provider): void
@@ -658,6 +833,20 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @return array<int,
+     *  array<int,
+     *      array{
+     *          params: array{
+     *              json: int[],
+     *              opciones: int,
+     *              depth: int,
+     *          },
+     *          expect: string|bool,
+     *      }
+     *>>
+     */
     public static function providerJson(): array
     {
         return [
@@ -687,6 +876,17 @@ class PlantillaTest extends TestCase
         ];
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      json: int[],
+     *      opciones: int,
+     *      depth: int,
+     *  },
+     *  expect: string|bool,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerjson')]
     public function json__Devuelve_un_string(array $provider): void
@@ -705,6 +905,17 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      json: int[],
+     *      opciones: int,
+     *      depth: int,
+     *  },
+     *  expect: string|bool,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerjson')]
     public function json__echo(array $provider): void
@@ -719,6 +930,20 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @return array<int,
+     *  array<int,
+     *      array{
+     *          params: array{
+     *              atr: string,
+     *              valor: string,
+     *              tipo: int,
+     *          },
+     *          expect: string,
+     *      }
+     * >>
+     */
     public static function providerAtr(): array
     {
         return [
@@ -772,6 +997,17 @@ class PlantillaTest extends TestCase
         ];
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      atr: string,
+     *      valor: string,
+     *      tipo: int,
+     *  },
+     *  expect: string,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerAtr')]
     public function atr__Devuelve_string(array $provider): void
@@ -790,6 +1026,17 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      atr: string,
+     *      valor: string,
+     *      tipo: int,
+     *  },
+     *  expect: string,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerAtr')]
     public function atr__Echo(array $provider): void
@@ -804,6 +1051,20 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @return array<int,
+     *  array<int,
+     *      array{
+     *          params: array{
+     *              array: string[],
+     *              modo: int,
+     *              separador: string,
+     *          },
+     *          expect: string,
+     *      }
+     * >>
+     */
     public static function providerEach(): array
     {
         return [
@@ -853,6 +1114,17 @@ class PlantillaTest extends TestCase
         ];
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      array: string[],
+     *      modo: int,
+     *      separador: string,
+     *  },
+     *  expect: string,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerEach')]
     public function each(array $provider): void
@@ -871,6 +1143,17 @@ class PlantillaTest extends TestCase
         );
     }
 
+    /**
+     *
+     * @param array{
+     *  params: array{
+     *      array: string[],
+     *      modo: int,
+     *      separador: string,
+     *  },
+     *  expect: string,
+     * } $provider
+     */
     #[Test]
     #[DataProvider('providerEach')]
     public function each__Echo(array $provider): void
