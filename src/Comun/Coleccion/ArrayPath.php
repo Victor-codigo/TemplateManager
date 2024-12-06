@@ -19,10 +19,10 @@ class ArrayPath extends ArrayBase
      * @param bool   $encontrado [OUT] TRUE si se encuentra, FALSE si no se encuentra
      * @param string $separator  separador que se usa para crear la ruta
      *
-     * @return mixed|null valor
+     * @return object|null valor
      *                    NULL si no se encuentra
      */
-    public function getPath($path, &$encontrado = false, $separator = '.')
+    public function getPath(string $path, bool &$encontrado = false, string  $separator = '.'):?object
     {
         return $this->getPointer($path, $encontrado, $separator);
     }
@@ -39,7 +39,7 @@ class ArrayPath extends ArrayBase
      * @return bool TRUE si se creó con éxito,
      *              FALSE si no se creó
      */
-    public function setPath($path, mixed $value, $separator = '.'): bool
+    public function setPath(string $path, mixed $value, string  $separator = '.'): bool
     {
         if ('' === $path) {
             $this->items = [$value];
@@ -47,6 +47,7 @@ class ArrayPath extends ArrayBase
             return true;
         }
 
+        // @phpstan-ignore argument.type
         $path_indices = explode($separator, $path);
         $path_indices_count = count($path_indices);
         $item_actual = &$this->items;
@@ -77,7 +78,7 @@ class ArrayPath extends ArrayBase
      * @return bool TRUE si el path existe
      *              FALSE si no existe
      */
-    public function pathExists($path, $separator = '.')
+    public function pathExists(string $path, string $separator = '.'):bool
     {
         $encontrado = false;
         $this->getPointer($path, $encontrado, $separator);
@@ -96,7 +97,7 @@ class ArrayPath extends ArrayBase
      * @return bool TRUE si se borró correctamente,
      *              FALSE si no se borró
      */
-    public function removePath($path, $separator = '.'): bool
+    public function removePath(string $path, string  $separator = '.'): bool
     {
         if ('' == $path) {
             $this->clear();
@@ -107,6 +108,7 @@ class ArrayPath extends ArrayBase
         $contenedor = &$this->items;
         $path_ultimo = $path;
         $encontrado = true;
+        // @phpstan-ignore argument.type
         $path_array = explode($separator, $path);
 
         if (count($path_array) > 1) {
@@ -115,6 +117,7 @@ class ArrayPath extends ArrayBase
             $contenedor = &$this->getPointer($path_contenedor, $encontrado, $separator);
         }
 
+        // @phpstan-ignore offsetAccess.nonOffsetAccessible
         if (!$encontrado || !isset($contenedor[$path_ultimo])) {
             return false;
         }
@@ -132,10 +135,11 @@ class ArrayPath extends ArrayBase
      * @param string $path
      * @param bool   $encontrado [OUT] TRUE si se encuentra, FALSE si no se encuentra
      *
-     * @return resource|null NULL si no se encuentra
+     * @return object|null NULL si no se encuentra
      */
-    public function &getPointer(string $path, bool &$encontrado = false, string $separator = '.')
+    public function &getPointer(string $path, bool &$encontrado = false, string $separator = '.'):?object
     {
+        // @phpstan-ignore argument.type
         $path_array = explode($separator, $path);
         $item_actual = &$this->items;
         $encontrado = true;

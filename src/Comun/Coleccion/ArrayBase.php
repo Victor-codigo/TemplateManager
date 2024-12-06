@@ -62,11 +62,11 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      *
      * @version 1.0
      *
-     * @return int|null indice actual
-     *                  NULL si está vacío o ha alcanzado el final
+     * @return string|int|null indice actual
+     *                         NULL si está vacío o ha alcanzado el final
      */
     #[\Override]
-    public function key(): mixed
+    public function key(): string|int|null
     {
         return key($this->items);
     }

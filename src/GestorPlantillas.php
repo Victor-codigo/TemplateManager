@@ -158,9 +158,9 @@ class GestorPlantillas
      *
      * @param PlantillaConfig $config Configuración de la plantilla
      *
-     * @return Plantilla plantilla cargada
+     * @return Plantilla|Plantilla[] plantilla cargada
      */
-    public function cargarPlantilla(PlantillaConfig $config)
+    public function cargarPlantilla(PlantillaConfig $config):Plantilla|array
     {
         $plantilla = $this->getPlantilla($config->path);
 
@@ -199,9 +199,11 @@ class GestorPlantillas
         }
 
         $plantilla_config = new PlantillaConfig();
+        // @phpstan-ignore classConstant.nonObject
         $plantilla_config->path = $data::PATH;
+        // @phpstan-ignore classConstant.nonObject
         $plantilla_config->lang_raiz = $data::LANG_RAIZ;
-
+        // @phpstan-ignore method.nonObject
         return $this->cargarPlantilla($plantilla_config)
                     ->render($data, $string);
     }

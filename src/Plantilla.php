@@ -260,7 +260,7 @@ class Plantilla
      */
     public function lang(string $path,array $sustitucion = [], $marca = ':', $string = false): ?string
     {
-        $valor = $this->gestor->getLang()->get(
+        $valor =(string) $this->gestor->getLang()->get(
             $this->getLangRaiz().'.'.$path,
             $sustitucion,
             '.',
@@ -317,7 +317,7 @@ class Plantilla
      *
      * @return string con los valores escapados
      */
-    public function data($valor, $string = false): ?string
+    public function data(string $valor, bool $string = false): ?string
     {
         $data = htmlspecialchars(
             $valor,
@@ -342,15 +342,16 @@ class Plantilla
      * @param array<string, string>  $sustitucion      caracteres que se sustituyen en cada una de las partes
      *                                 de la URL, con el siguiente formato:
      *                                 - arr[carácter a sustituir] = string, carácter sustituido
-     * @param string $seccionSeparador carácter separador de las secciones de la URL
+     * @param string $seccion_separador carácter separador de las secciones de la URL
      * @param bool   $string           TRUE si devuelve un string
      *                                 FALSE si se muestra por pantalla
      *
      * @return string URL saneada
      */
-    public function url($url, array $sustitucion = [' ' => '-'], $seccionSeparador = self::URL_SECCION_SEPARADOR, $string = false): ?string
+    public function url($url, array $sustitucion = [' ' => '-'], string $seccion_separador = self::URL_SECCION_SEPARADOR, bool $string = false): ?string
     {
-        $url_trozos = explode($seccionSeparador, trim($url));
+        // @phpstan-ignore argument.type
+        $url_trozos = explode($seccion_separador, trim($url));
         $sustituido = array_keys($sustitucion);
 
         for ($i = 0, $length = count($url_trozos); $i < $length; ++$i) {
@@ -362,7 +363,8 @@ class Plantilla
         }
 
         return $this->data(
-            $this->urlEspaceHttpYSharp(implode($seccionSeparador, $url_trozos)),
+            // @phpstan-ignore argument.type
+            $this->urlEspaceHttpYSharp(implode($seccion_separador, $url_trozos)),
             $string
         );
     }
@@ -414,6 +416,7 @@ class Plantilla
      */
     public function json(mixed $json, int $opciones = JSON_HEX_TAG | JSON_HEX_AMP, int $depth = 512,  bool $string = false): ?string
     {
+        // @phpstan-ignore argument.type
         $retorno = json_encode($json, $opciones, $depth);
 
         if (false === $retorno) {

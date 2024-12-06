@@ -117,7 +117,7 @@ class PlantillaTest extends TestCase
      *              path: string
      *          },
      *          mock: array{
-     *              isReadable: bool,
+     *              is_readable: bool,
      *          }
      *  }>>
      */
@@ -131,7 +131,7 @@ class PlantillaTest extends TestCase
                         'path' => 'path/de/la/plantilla',
                     ],
                     'mock' => [
-                        'isReadable' => true,
+                        'is_readable' => true,
                     ],
                 ],
             ],
@@ -143,7 +143,7 @@ class PlantillaTest extends TestCase
                         'path' => 'path/de/la/plantilla/error',
                     ],
                     'mock' => [
-                        'isReadable' => false,
+                        'is_readable' => false,
                     ],
                 ],
             ],
@@ -157,7 +157,7 @@ class PlantillaTest extends TestCase
      *              path: string
      *          },
      *          mock: array{
-     *              isReadable: bool,
+     *              is_readable: bool,
      *          }
      *  } $provider
      */
@@ -167,9 +167,9 @@ class PlantillaTest extends TestCase
     {
         $plantilla__path = $this->propertyEdit($this->object, 'path');
 
-        PlantillaFixture::$is_readable = fn () => $provider['mock']['isReadable'];
+        PlantillaFixture::$is_readable = fn () => $provider['mock']['is_readable'];
 
-        if ($provider['mock']['isReadable']) {
+        if ($provider['mock']['is_readable']) {
             PlantillaFixture::$is_readable = fn (...$args): bool => true;
         } else {
             $this->expectException(ExceptionPlantillaNoEncontrada::class);
@@ -237,10 +237,10 @@ class PlantillaTest extends TestCase
      *                  path: string,
      *              },
      *              mock: array{
-     *                  isReadable: bool,
-     *                  isCallable: bool,
+     *                  is_readable: bool,
+     *                  is_callable: bool,
      *              },
-     *             expect: ExceptionPlantillaCargar,
+     *             expect: ExceptionPlantillaCargar|bool,
      *         }
      * >>
      */
@@ -254,8 +254,8 @@ class PlantillaTest extends TestCase
                         'path' => '',
                     ],
                     'mock' => [
-                        'isReadable' => false,
-                        'isCallable' => false,
+                        'is_readable' => false,
+                        'is_callable' => false,
                     ],
                     'expect' => new ExceptionPlantillaCargar(),
                 ],
@@ -268,8 +268,8 @@ class PlantillaTest extends TestCase
                         'path' => PATH_UNIT_FIXTURE.'/plantillas/plantillaOk.html.php',
                     ],
                     'mock' => [
-                        'isReadable' => true,
-                        'isCallable' => false,
+                        'is_readable' => true,
+                        'is_callable' => false,
                     ],
                     'expect' => new ExceptionPlantillaCargar(),
                 ],
@@ -282,8 +282,8 @@ class PlantillaTest extends TestCase
                         'path' => PATH_UNIT_FIXTURE.'/plantillas/plantillaOk.html.php',
                     ],
                     'mock' => [
-                        'isReadable' => true,
-                        'isCallable' => true,
+                        'is_readable' => true,
+                        'is_callable' => true,
                     ],
                     'expect' => true,
                 ],
@@ -298,8 +298,8 @@ class PlantillaTest extends TestCase
      *      path: string,
      *  },
      *  mock: array{
-     *      isReadable: bool,
-     *      isCallable: bool,
+     *      is_readable: bool,
+     *      is_callable: bool,
      *  },
      *  expect: ExceptionPlantillaCargar|bool,
      * } $provider
@@ -311,8 +311,8 @@ class PlantillaTest extends TestCase
     {
         $plantilla__callback = $this->propertyEdit($this->object, 'callback');
 
-        PlantillaFixture::$is_readable = fn (): bool => $provider['mock']['isReadable'];
-        PlantillaFixture::$is_callable = fn (): bool => $provider['mock']['isCallable'];
+        PlantillaFixture::$is_readable = fn (): bool => $provider['mock']['is_readable'];
+        PlantillaFixture::$is_callable = fn (): bool => $provider['mock']['is_callable'];
 
         if ($provider['expect'] instanceof \Exception) {
             $this->expectException($provider['expect']::class);
@@ -339,7 +339,7 @@ class PlantillaTest extends TestCase
      *  array<int,
      *      array{
      *          params: array{
-     *              data: string,
+     *              data: string|PlantillaDataMuestra,
      *              string: bool,
      *          },
      *          mock: array{
@@ -839,11 +839,11 @@ class PlantillaTest extends TestCase
      *  array<int,
      *      array{
      *          params: array{
-     *              json: int[],
+     *              json: int[]|string,
      *              opciones: int,
      *              depth: int,
      *          },
-     *          expect: string|bool,
+     *          expect: string,
      *      }
      *>>
      */
@@ -858,7 +858,7 @@ class PlantillaTest extends TestCase
                         'opciones' => JSON_HEX_TAG | JSON_HEX_AMP,
                         'depth' => 512,
                     ],
-                    'expect' => json_encode([1, 2, 3], JSON_HEX_TAG | JSON_HEX_AMP),
+                    'expect' => (string)json_encode([1, 2, 3], JSON_HEX_TAG | JSON_HEX_AMP),
                 ],
             ],
 
@@ -880,11 +880,11 @@ class PlantillaTest extends TestCase
      *
      * @param array{
      *  params: array{
-     *      json: int[],
+     *      json: int[]|string,
      *      opciones: int,
      *      depth: int,
      *  },
-     *  expect: string|bool,
+     *  expect: string,
      * } $provider
      */
     #[Test]
@@ -909,11 +909,11 @@ class PlantillaTest extends TestCase
      *
      * @param array{
      *  params: array{
-     *      json: int[],
+     *      json: int[]|string,
      *      opciones: int,
      *      depth: int,
      *  },
-     *  expect: string|bool,
+     *  expect: string,
      * } $provider
      */
     #[Test]
@@ -988,7 +988,7 @@ class PlantillaTest extends TestCase
                 [
                     'params' => [
                         'atr' => 'value',
-                        'valor' => 0,
+                        'valor' => '0',
                         'tipo' => 3333,
                     ],
                     'expect' => '',

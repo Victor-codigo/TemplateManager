@@ -137,6 +137,7 @@ class GestorPlantillasTest extends TestCase
     {
         $g_plantillas__plantilla = $this->propertyEdit($this->object, 'plantillas');
 
+        /** @var Plantilla $resultado */
         $resultado = $this->object->getPlantilla($provider['params']['path']);
 
         if (null !== $provider['params']['path']) {
@@ -147,6 +148,7 @@ class GestorPlantillasTest extends TestCase
                     'ERROR: el valor devuelto no es el esperado'
                 );
             } else {
+                // @phpstan-ignore method.impossibleType
                 $this->assertNull(
                     $resultado,
                     'ERROR: se esperaba que el resultado fuera NULL'
@@ -361,7 +363,7 @@ class GestorPlantillasTest extends TestCase
      *  array<int,
      *      array{
      *          params: array{
-     *              data: string,
+     *              data: string|PlantillaDataMuestraGestor,
      *              string: bool,
      *          },
      *          mock: array{

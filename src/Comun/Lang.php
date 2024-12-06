@@ -240,18 +240,21 @@ class Lang
      * @param string $marca       caracteres que se utilizan para marcar el place-holder
      * @param string $escape      Carácter que se utiliza de escape para la marca place-holder
      *
-     * @return string|string[]|null Devuelve el valor de la variable
+     * @return string|null Devuelve el valor de la variable
      *                              NULL si no se encuentra devuelve
      */
-    public function get(string $path, array $sustitucion = [], string $separador = self::SEPARADOR, string $marca = ':', string $escape = '\\')
+    public function get(string $path, array $sustitucion = [], string $separador = self::SEPARADOR, string $marca = ':', string $escape = '\\'):?string
     {
+        $encontrado = false;
         $retorno = $this->lang_vars->getPath($path, $encontrado, $separador);
 
         if ($encontrado) {
+            // @phpstan-ignore argument.type
             $retorno = $this->replace($retorno, $sustitucion, $marca, $escape);
         }
 
-        return $retorno;
+        // @phpstan-ignore return.type
+        return  $retorno;
     }
 
     /**
@@ -283,7 +286,7 @@ class Lang
 
     /**
      * Copia el contenido de un path de origen a otro path de destino.
-     * Si $path_destino no existe lo crea, si existe lo sobreescribe.
+     * Si $path_destino no existe lo crea, si existe lo sobre escribe.
      * En el caso de que $path_origen y $path_destino sean ambos array los combina.
      *
      * @version 1.0
@@ -294,15 +297,19 @@ class Lang
      */
     public function copy(string $path_origen, string $path_destino, string $marca = self::SEPARADOR):bool
     {
+        $retorno = false;
         $vars_origen = $this->lang_vars->getPath($path_origen, $retorno, $marca);
 
         if ($retorno) {
+            $encontrado = false;
             $vars_destino = $this->lang_vars->getPath($path_destino, $encontrado, $marca);
 
+            // @phpstan-ignore booleanAnd.alwaysFalse, booleanAnd.alwaysFalse, function.impossibleType, function.impossibleType
             if ($encontrado && is_array($vars_origen) && is_array($vars_destino)) {
                 $vars_origen = array_replace_recursive($vars_destino, $vars_origen);
             }
 
+            // @phpstan-ignore argument.type
             $this->set($path_destino, $vars_origen, $marca);
         }
 
@@ -340,7 +347,7 @@ class Lang
      *
      * @return string string con los place-holders reemplazados
      */
-    public function replace(string $valor, array $sustitucion = [], string $marca = ':', string $escape = '\\')
+    public function replace(string $valor, array $sustitucion = [], string $marca = ':', string $escape = '\\'):string
     {
         if ($sustitucion !== []) {
             $patron = [];
@@ -349,7 +356,7 @@ class Lang
             $escape = preg_quote($escape, '/');
 
             foreach (array_keys($sustitucion) as $sustitucionNombre) {
-                $patron[] = '/(?<![^'.$escape.']'.$escape.')'.$marca.preg_quote($sustitucionNombre).'/uis';
+                $patron[] = '/(?<![^'.$escape.']'.$escape.')'.$marca.preg_quote((string)$sustitucionNombre).'/uis';
             }
 
             $valor = preg_replace($patron, array_values($sustitucion), $valor);

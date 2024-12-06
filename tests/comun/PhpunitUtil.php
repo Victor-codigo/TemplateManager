@@ -287,25 +287,7 @@ trait PhpunitUtil
         );
     }
 
-    /**
-     * Afirma que todos los elementos del array son instancias de la clase pasada.
-     *
-     * @version 1.0
-     *
-     * @param string $expected nombre completo de la clase
-     * @param mixed[]  $array    array a comprobar
-     * @param string $mensaje  mensaje de error
-     */
-    public function assertArrayInstancesOf(string $expected, array $array, string $mensaje = ''): void
-    {
-        foreach ($array as $indice => $objeto) {
-            $this->assertInstanceOf(
-                $expected,
-                $objeto,
-                'INDICE =>'.$indice.' |=| '.$mensaje
-            );
-        }
-    }
+
 
     /**
      * Afirma que el objeto pasado tiene uno de los tipos esperados.
