@@ -17,7 +17,6 @@ final class PlantillaDataMuestra extends PlantillaData
     public bool $propiedad_3 = false;
     public mixed $propiedad_4;
     /**
-     *
      * @var int[]|null
      */
     public ?array $propiedad_5 = [1, 2, 3];

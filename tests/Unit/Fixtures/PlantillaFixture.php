@@ -6,8 +6,7 @@ namespace Lib;
 
 use Tests\Unit\Fixtures\PlantillaFixture;
 
-
-function is_readable(string $filename):bool
+function is_readable(string $filename): bool
 {
     return \is_callable(PlantillaFixture::$is_readable)
         ? (PlantillaFixture::$is_readable)($filename)
@@ -36,19 +35,16 @@ class PlantillaFixture
 {
     /**
      * callBack del mock de la función is_callable.
-     *
      */
-    public static ?Closure $is_callable=null;
+    public static ?Closure $is_callable = null;
 
     /**
      * Callback del mock de la función defined.
-     *
      */
-    public static ?Closure $defined=null;
+    public static ?Closure $defined = null;
 
     /**
      * Callback del mock de la función is_readable.
-     *
      */
-    public static ?Closure $is_readable=null;
+    public static ?Closure $is_readable = null;
 }

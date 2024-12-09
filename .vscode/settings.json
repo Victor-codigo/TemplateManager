@@ -1,4 +1,5 @@
 {
-    "php-cs-fixer.executablePath": "",
-    "php-cs-fixer.executablePathWindows": ""
+    "php-cs-fixer.executablePath": "php-cs-fixer",
+    "php-cs-fixer.executablePathWindows": "",
+    "php-cs-fixer.onsave": true
 }

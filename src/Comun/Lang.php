@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Lib\Comun;
 
-use Lib\Comun\Coleccion\ArrayBase;
 use Lib\Comun\Coleccion\ArrayPath;
 
 /**
@@ -30,7 +29,6 @@ class Lang
 
     /**
      * Establece el path donde se guardan los idiomas.
-     *
      */
     public function setLangPath(string $path): void
     {
@@ -63,9 +61,9 @@ class Lang
      * @version 1.0
      *
      * @param string[] $langs con los idiomas validos, con el siguiente formato
-     *                     - arr[identificador del idioma] = string, path de la carpeta de idioma
-     *                     relativo al la carpeta donde se
-     *                     guardan los idiomas
+     *                        - arr[identificador del idioma] = string, path de la carpeta de idioma
+     *                        relativo al la carpeta donde se
+     *                        guardan los idiomas
      */
     public function setLangs(array $langs): void
     {
@@ -78,9 +76,9 @@ class Lang
      * @version 1.0
      *
      * @return string[] con el siguiente formato:
-     *               - arr[identificador del idioma] = string, path de la carpeta de idioma
-     *               relativo al la carpeta donde se
-     *               guardan los idiomas
+     *                  - arr[identificador del idioma] = string, path de la carpeta de idioma
+     *                  relativo al la carpeta donde se
+     *                  guardan los idiomas
      */
     public function getLangs(): array
     {
@@ -89,8 +87,6 @@ class Lang
 
     /**
      * Identificador del idioma que se carga.
-     *
-     * @var int|string
      */
     private int|string|null $lang = null;
 
@@ -112,8 +108,6 @@ class Lang
      * Identificador del idioma que es cargado.
      *
      * @version 1.0
-     *
-     * @return int|string
      */
     public function getLang(): int|string|null
     {
@@ -232,18 +226,18 @@ class Lang
      *
      * @version 1.0
      *
-     * @param string $path        path a la variable
-     * @param array<string|int, string>  $sustitucion con los place-holders a sustituir. Con el siguiente formato:
-     *                            - arr[place-holder sin marcador] = string, reemplazo
-     * @param string $separador   carácter que se usa para las carpetas y los indices de los
-     *                            array dentro del archivo
-     * @param string $marca       caracteres que se utilizan para marcar el place-holder
-     * @param string $escape      Carácter que se utiliza de escape para la marca place-holder
+     * @param string                    $path        path a la variable
+     * @param array<string|int, string> $sustitucion con los place-holders a sustituir. Con el siguiente formato:
+     *                                               - arr[place-holder sin marcador] = string, reemplazo
+     * @param string                    $separador   carácter que se usa para las carpetas y los indices de los
+     *                                               array dentro del archivo
+     * @param string                    $marca       caracteres que se utilizan para marcar el place-holder
+     * @param string                    $escape      Carácter que se utiliza de escape para la marca place-holder
      *
      * @return string|null Devuelve el valor de la variable
-     *                              NULL si no se encuentra devuelve
+     *                     NULL si no se encuentra devuelve
      */
-    public function get(string $path, array $sustitucion = [], string $separador = self::SEPARADOR, string $marca = ':', string $escape = '\\'):?string
+    public function get(string $path, array $sustitucion = [], string $separador = self::SEPARADOR, string $marca = ':', string $escape = '\\'): ?string
     {
         $encontrado = false;
         $retorno = $this->lang_vars->getPath($path, $encontrado, $separador);
@@ -254,7 +248,7 @@ class Lang
         }
 
         // @phpstan-ignore return.type
-        return  $retorno;
+        return $retorno;
     }
 
     /**
@@ -295,7 +289,7 @@ class Lang
      * @param string $path_destino path de destino
      * @param string $marca        carácter que separa los niveles del path
      */
-    public function copy(string $path_origen, string $path_destino, string $marca = self::SEPARADOR):bool
+    public function copy(string $path_origen, string $path_destino, string $marca = self::SEPARADOR): bool
     {
         $retorno = false;
         $vars_origen = $this->lang_vars->getPath($path_origen, $retorno, $marca);
@@ -339,24 +333,24 @@ class Lang
      *
      * @version 1.0
      *
-     * @param string $valor       valor que se reemplaza
-     * @param array<string|int, string>  $sustitucion con los place-holders a sustituir. Con el siguiente formato:
-     *                            - arr[place-holder sin marcador] = string, reemplazo
-     * @param string $marca       caracteres que se utilizan para marcar el place-holder
-     * @param string $escape      Carácter que se utiliza de escape para la marca place-holder
+     * @param string                    $valor       valor que se reemplaza
+     * @param array<string|int, string> $sustitucion con los place-holders a sustituir. Con el siguiente formato:
+     *                                               - arr[place-holder sin marcador] = string, reemplazo
+     * @param string                    $marca       caracteres que se utilizan para marcar el place-holder
+     * @param string                    $escape      Carácter que se utiliza de escape para la marca place-holder
      *
      * @return string string con los place-holders reemplazados
      */
-    public function replace(string $valor, array $sustitucion = [], string $marca = ':', string $escape = '\\'):string
+    public function replace(string $valor, array $sustitucion = [], string $marca = ':', string $escape = '\\'): string
     {
-        if ($sustitucion !== []) {
+        if ([] !== $sustitucion) {
             $patron = [];
 
             $marca = preg_quote($marca, '/');
             $escape = preg_quote($escape, '/');
 
             foreach (array_keys($sustitucion) as $sustitucionNombre) {
-                $patron[] = '/(?<![^'.$escape.']'.$escape.')'.$marca.preg_quote((string)$sustitucionNombre).'/uis';
+                $patron[] = '/(?<![^'.$escape.']'.$escape.')'.$marca.preg_quote((string) $sustitucionNombre).'/uis';
             }
 
             $valor = preg_replace($patron, array_values($sustitucion), $valor);

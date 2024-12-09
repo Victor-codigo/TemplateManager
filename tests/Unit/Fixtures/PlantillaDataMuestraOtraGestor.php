@@ -17,8 +17,7 @@ final class PlantillaDataMuestraOtraGestor extends PlantillaData
     public bool $propiedad_3 = false;
     public mixed $propiedad_4;
     /**
-     *
      * @var int[]|null
      */
-    public array|null $propiedad_5 = [1, 2, 3];
+    public ?array $propiedad_5 = [1, 2, 3];
 }

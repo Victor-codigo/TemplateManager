@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Lib\Comun;
 
-use ReflectionClass;
-
 /**
  * Permite crear enumeraciones.
  */
@@ -15,7 +13,8 @@ abstract class Enum
      * Crea la reflexión de la enumeración.
      *
      * @version 1.0
-     * @return ReflectionClass<object>
+     *
+     * @return \ReflectionClass<object>
      */
     private static function getReflexion(): \ReflectionClass
     {

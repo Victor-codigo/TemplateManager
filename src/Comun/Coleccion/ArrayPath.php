@@ -6,7 +6,6 @@ namespace Lib\Comun\Coleccion;
 
 /**
  * Array al que se le pueden modificar los items a través de un path.
- *
  */
 class ArrayPath extends ArrayBase
 {
@@ -20,9 +19,9 @@ class ArrayPath extends ArrayBase
      * @param string $separator  separador que se usa para crear la ruta
      *
      * @return object|null valor
-     *                    NULL si no se encuentra
+     *                     NULL si no se encuentra
      */
-    public function getPath(string $path, bool &$encontrado = false, string  $separator = '.'):?object
+    public function getPath(string $path, bool &$encontrado = false, string $separator = '.'): ?object
     {
         return $this->getPointer($path, $encontrado, $separator);
     }
@@ -39,7 +38,7 @@ class ArrayPath extends ArrayBase
      * @return bool TRUE si se creó con éxito,
      *              FALSE si no se creó
      */
-    public function setPath(string $path, mixed $value, string  $separator = '.'): bool
+    public function setPath(string $path, mixed $value, string $separator = '.'): bool
     {
         if ('' === $path) {
             $this->items = [$value];
@@ -78,7 +77,7 @@ class ArrayPath extends ArrayBase
      * @return bool TRUE si el path existe
      *              FALSE si no existe
      */
-    public function pathExists(string $path, string $separator = '.'):bool
+    public function pathExists(string $path, string $separator = '.'): bool
     {
         $encontrado = false;
         $this->getPointer($path, $encontrado, $separator);
@@ -97,7 +96,7 @@ class ArrayPath extends ArrayBase
      * @return bool TRUE si se borró correctamente,
      *              FALSE si no se borró
      */
-    public function removePath(string $path, string  $separator = '.'): bool
+    public function removePath(string $path, string $separator = '.'): bool
     {
         if ('' == $path) {
             $this->clear();
@@ -132,12 +131,11 @@ class ArrayPath extends ArrayBase
      *
      * @version 1.0
      *
-     * @param string $path
-     * @param bool   $encontrado [OUT] TRUE si se encuentra, FALSE si no se encuentra
+     * @param bool $encontrado [OUT] TRUE si se encuentra, FALSE si no se encuentra
      *
      * @return object|null NULL si no se encuentra
      */
-    public function &getPointer(string $path, bool &$encontrado = false, string $separator = '.'):?object
+    public function &getPointer(string $path, bool &$encontrado = false, string $separator = '.'): ?object
     {
         // @phpstan-ignore argument.type
         $path_array = explode($separator, $path);

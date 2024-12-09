@@ -12,9 +12,9 @@ use Lib\PlantillaConfig;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Tests\comun\PhpunitUtil;
 use Tests\Unit\Fixtures\PlantillaDataMuestraGestor;
 use Tests\Unit\Fixtures\PlantillaDataMuestraOtraGestor;
-use Tests\comun\PhpunitUtil;
 
 class GestorPlantillasTest extends TestCase
 {
@@ -76,7 +76,6 @@ class GestorPlantillasTest extends TestCase
     }
 
     /**
-     *
      * @return array<int,
      *  array<int,
      *      array{
@@ -123,7 +122,6 @@ class GestorPlantillasTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      path: string|null,
@@ -164,7 +162,6 @@ class GestorPlantillasTest extends TestCase
     }
 
     /**
-     *
      * @return array<int,
      *  array<int,
      *      array{
@@ -211,7 +208,6 @@ class GestorPlantillasTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      id: string|null,
@@ -282,7 +278,7 @@ class GestorPlantillasTest extends TestCase
         $lang = new Lang();
         $lang->setLangs(['lang' => 'lang']);
         $lang->setLang('lang');
-        $this->propertyEdit($this->object, 'lang',$lang);
+        $this->propertyEdit($this->object, 'lang', $lang);
         $resultado = $this->object->getLang();
 
         $this->assertEquals(
@@ -358,7 +354,6 @@ class GestorPlantillasTest extends TestCase
     }
 
     /**
-     *
      * @return array<int,
      *  array<int,
      *      array{
@@ -435,7 +430,6 @@ class GestorPlantillasTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      data: string,

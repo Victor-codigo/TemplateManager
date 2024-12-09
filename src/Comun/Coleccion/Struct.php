@@ -26,10 +26,10 @@ class Struct implements \Serializable
      * @version 1.1
      *
      * @param array<string, mixed> $array con los datos de la estructura , con el siguiente formato:
-     *                     - arr[propiedad] = mixed, valor de la propiedad
-     * @param bool  $crear TRUE se crea una propiedad para cada indice del array,
-     *                     FALSE se omiten los elementos del array cuyo indice no coincida
-     *                     con el de una propiedad de la estructura
+     *                                    - arr[propiedad] = mixed, valor de la propiedad
+     * @param bool                 $crear TRUE se crea una propiedad para cada indice del array,
+     *                                    FALSE se omiten los elementos del array cuyo indice no coincida
+     *                                    con el de una propiedad de la estructura
      */
     public function fromArray(array $array, $crear = false): void
     {
@@ -51,11 +51,10 @@ class Struct implements \Serializable
      * @param bool   $crear  TRUE se crea una propiedad para cada propiedad de la estructura,
      *                       FALSE se omiten las propiedades de la estructura
      *                       que no pertenecen a la estructura
-     *
      */
-    public function fromStruct(Struct $struct, $crear = false):void
+    public function fromStruct(Struct $struct, $crear = false): void
     {
-         $this->fromArray($struct->toArray(0));
+        $this->fromArray($struct->toArray(0));
     }
 
     /**
@@ -68,7 +67,7 @@ class Struct implements \Serializable
      *                     0 solo el actual
      *
      * @return array<string, mixed> con las propiedades de la estructura, con el siguiente formato:
-     *               - arr[nombre de la propiedad] = mixed, valor de la propiedad
+     *                              - arr[nombre de la propiedad] = mixed, valor de la propiedad
      */
     public function toArray(int $niveles = 10): array
     {
@@ -122,8 +121,8 @@ class Struct implements \Serializable
      * @param bool  $strict TRUE si la comparación es estricta, FALSE no
      *
      * @return array<string, mixed> con las propiedades de la estructura que no contengan el valor pasado,
-     *               con el siguiente formato:
-     *               - arr[propiedad] = mixed, valor de la propiedad
+     *                              con el siguiente formato:
+     *                              - arr[propiedad] = mixed, valor de la propiedad
      */
     public function getPropiedadesNoValor(mixed $valor, bool $strict = false): array
     {
@@ -274,7 +273,6 @@ class Struct implements \Serializable
     }
 
     /**
-     *
      * @param array<int|string, mixed> $data
      */
     public function __unserialize(array $data): void

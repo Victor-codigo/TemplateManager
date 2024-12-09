@@ -17,10 +17,10 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Tests\comun\PhpunitUtil;
 use Tests\Unit\Fixtures\PlantillaDataMuestra;
 use Tests\Unit\Fixtures\PlantillaFixture;
 use Tests\Unit\Fixtures\PlantillaForTesting;
-use Tests\comun\PhpunitUtil;
 
 use const Tests\PATH_UNIT_FIXTURE;
 
@@ -44,7 +44,6 @@ class PlantillaTest extends TestCase
 
     /**
      * Clase Lang.
-     *
      */
     private MockObject&Lang $lang;
 
@@ -109,7 +108,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @return array<int,
      *  array<int,
      *      array{
@@ -151,7 +149,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *          params: array{
      *              path: string
@@ -229,7 +226,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @return array<int,
      *      array<int,
      *          array{
@@ -292,7 +288,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      path: string,
@@ -303,7 +298,6 @@ class PlantillaTest extends TestCase
      *  },
      *  expect: ExceptionPlantillaCargar|bool,
      * } $provider
-     * @return void
      */
     #[Test]
     #[DataProvider('providerCargar')]
@@ -334,7 +328,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @return array<int,
      *  array<int,
      *      array{
@@ -416,7 +409,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      data: string,
@@ -428,7 +420,6 @@ class PlantillaTest extends TestCase
      *  },
      *  expect: ExceptionDataCargar|string|bool,
      * } $provider
-     * @return void
      */
     #[Test]
     #[DataProvider('providerRender')]
@@ -489,7 +480,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @return array<int,
      *  array<int,
      *      array{
@@ -535,7 +525,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      id: string,
@@ -566,7 +555,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @return array<int,
      *  array<int,
      *      array{
@@ -613,7 +601,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      valores: string,
@@ -635,7 +622,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      valores: string,
@@ -653,7 +639,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @return array<int,
      *  array<int,
      *      array{
@@ -781,7 +766,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      url: string,
@@ -809,7 +793,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      url: string,
@@ -834,7 +817,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @return array<int,
      *  array<int,
      *      array{
@@ -858,7 +840,7 @@ class PlantillaTest extends TestCase
                         'opciones' => JSON_HEX_TAG | JSON_HEX_AMP,
                         'depth' => 512,
                     ],
-                    'expect' => (string)json_encode([1, 2, 3], JSON_HEX_TAG | JSON_HEX_AMP),
+                    'expect' => (string) json_encode([1, 2, 3], JSON_HEX_TAG | JSON_HEX_AMP),
                 ],
             ],
 
@@ -877,7 +859,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      json: int[]|string,
@@ -906,7 +887,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      json: int[]|string,
@@ -931,7 +911,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @return array<int,
      *  array<int,
      *      array{
@@ -998,7 +977,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      atr: string,
@@ -1027,7 +1005,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      atr: string,
@@ -1052,7 +1029,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @return array<int,
      *  array<int,
      *      array{
@@ -1115,7 +1091,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      array: string[],
@@ -1144,7 +1119,6 @@ class PlantillaTest extends TestCase
     }
 
     /**
-     *
      * @param array{
      *  params: array{
      *      array: string[],
@@ -1280,6 +1254,4 @@ class PlantillaTest extends TestCase
             'ERROR: el valor devuelto no es el esperado'
         );
     }
-
-
 }

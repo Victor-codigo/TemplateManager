@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Lib;
 
-use Closure;
 use Lib\Comun\Call;
 use Lib\Exception\ExceptionDataCargar;
 use Lib\Exception\ExceptionPlantillaCargar;
@@ -108,9 +107,8 @@ class Plantilla
      * Parámetros:
      *  - PlantillaData, información que se l pasa a la estructura
      *  - Plantilla, plantilla.
-     *
      */
-    private ?Closure $callback;
+    private ?\Closure $callback;
 
     /**
      * Obtiene la función de la plantilla.
@@ -137,7 +135,7 @@ class Plantilla
      */
     public function __construct(
         private ?GestorPlantillas $gestor,
-        PlantillaConfig $config
+        PlantillaConfig $config,
     ) {
         $this->setPath($config->path);
         $this->setLangRaiz($config->lang_raiz);
@@ -169,7 +167,7 @@ class Plantilla
         if (is_readable($path)) {
             $plantilla = require $path;
 
-            $callable_name='';
+            $callable_name = '';
             if (is_callable($plantilla, false, $callable_name)) {
                 $this->callback = $plantilla;
             } else {
@@ -224,7 +222,6 @@ class Plantilla
      *                                     Objeto con la información
      * @param bool                 $string TRUE si la plantilla se carga en una cadena,
      *                                     FALSE si se carga en el buffer de salida
-     *
      */
     public function renderPlantilla($data, $string = false): string|bool
     {
@@ -250,17 +247,16 @@ class Plantilla
      *
      * @version 1.0
      *
-     * @param string $path        path de la variable
-     * @param array<string|int, string>   $sustitucion con los place-holders a sustituir. Con el siguiente formato:
-     *                            - arr[place-holder sin marcador] = string, reemplazo
-     * @param string $marca       caracteres que se utilizan para marcar el place-holder
-     * @param bool   $string      TRUE si devuelve un string
-     *                            FALSE si se muestra por pantalla
-     *
+     * @param string                    $path        path de la variable
+     * @param array<string|int, string> $sustitucion con los place-holders a sustituir. Con el siguiente formato:
+     *                                               - arr[place-holder sin marcador] = string, reemplazo
+     * @param string                    $marca       caracteres que se utilizan para marcar el place-holder
+     * @param bool                      $string      TRUE si devuelve un string
+     *                                               FALSE si se muestra por pantalla
      */
-    public function lang(string $path,array $sustitucion = [], $marca = ':', $string = false): ?string
+    public function lang(string $path, array $sustitucion = [], $marca = ':', $string = false): ?string
     {
-        $valor =(string) $this->gestor->getLang()->get(
+        $valor = (string) $this->gestor->getLang()->get(
             $this->getLangRaiz().'.'.$path,
             $sustitucion,
             '.',
@@ -284,7 +280,7 @@ class Plantilla
      *
      * @return string con los valores escapados
      */
-    public function langHtml(string $path, array $sustitucion = [], $marca = ':'):string
+    public function langHtml(string $path, array $sustitucion = [], $marca = ':'): string
     {
         $lang = $this->gestor->getLang();
         $valor = $lang->get(
@@ -302,8 +298,7 @@ class Plantilla
             '\\'
         );
 
-            return $texto_escapado;
-
+        return $texto_escapado;
     }
 
     /**
@@ -330,6 +325,7 @@ class Plantilla
         }
 
         echo $data;
+
         return null;
     }
 
@@ -338,13 +334,13 @@ class Plantilla
      *
      * @version 1.1
      *
-     * @param string $url              URL a escapar
-     * @param array<string, string>  $sustitucion      caracteres que se sustituyen en cada una de las partes
-     *                                 de la URL, con el siguiente formato:
-     *                                 - arr[carácter a sustituir] = string, carácter sustituido
-     * @param string $seccion_separador carácter separador de las secciones de la URL
-     * @param bool   $string           TRUE si devuelve un string
-     *                                 FALSE si se muestra por pantalla
+     * @param string                $url               URL a escapar
+     * @param array<string, string> $sustitucion       caracteres que se sustituyen en cada una de las partes
+     *                                                 de la URL, con el siguiente formato:
+     *                                                 - arr[carácter a sustituir] = string, carácter sustituido
+     * @param string                $seccion_separador carácter separador de las secciones de la URL
+     * @param bool                  $string            TRUE si devuelve un string
+     *                                                 FALSE si se muestra por pantalla
      *
      * @return string URL saneada
      */
@@ -394,7 +390,7 @@ class Plantilla
             $reemplazo[] = '#';
         }
 
-        if ($patron !== []) {
+        if ([] !== $patron) {
             return preg_replace($patron, $reemplazo, $url, 1);
         }
 
@@ -414,7 +410,7 @@ class Plantilla
      *
      * @return string Si existe la variable, devuelve la variable convertida a JSON
      */
-    public function json(mixed $json, int $opciones = JSON_HEX_TAG | JSON_HEX_AMP, int $depth = 512,  bool $string = false): ?string
+    public function json(mixed $json, int $opciones = JSON_HEX_TAG | JSON_HEX_AMP, int $depth = 512, bool $string = false): ?string
     {
         // @phpstan-ignore argument.type
         $retorno = json_encode($json, $opciones, $depth);
@@ -428,6 +424,7 @@ class Plantilla
         }
 
         echo $retorno;
+
         return null;
     }
 
@@ -462,6 +459,7 @@ class Plantilla
         }
 
         echo $retorno;
+
         return null;
     }
 
@@ -471,11 +469,11 @@ class Plantilla
      *
      * @version 1.0
      *
-     * @param string[]  $array     con los elementos
-     * @param int   $modo      establece el modo en el que se concatenen los elementos
-     * @param string $separador string con el que se separan los elementos
-     * @param bool   $string    TRUE si devuelve un string
-     *                          FALSE si se muestra por pantalla
+     * @param string[] $array     con los elementos
+     * @param int      $modo      establece el modo en el que se concatenen los elementos
+     * @param string   $separador string con el que se separan los elementos
+     * @param bool     $string    TRUE si devuelve un string
+     *                            FALSE si se muestra por pantalla
      *
      * @return string con los elementos concatenados
      */
@@ -507,6 +505,7 @@ class Plantilla
         }
 
         echo $retorno;
+
         return null;
     }
 }

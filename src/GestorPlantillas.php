@@ -27,7 +27,7 @@ class GestorPlantillas
      *                                    Plantillas si no se pasa $path
      *                                    NULL si no se encuentra el path
      */
-    public function getPlantilla(?string $path):Plantilla|array|null
+    public function getPlantilla(?string $path): Plantilla|array|null
     {
         $retorno = null;
 
@@ -95,7 +95,6 @@ class GestorPlantillas
 
     /**
      * idioma.
-     *
      */
     private ?Lang $lang;
 
@@ -160,7 +159,7 @@ class GestorPlantillas
      *
      * @return Plantilla|Plantilla[] plantilla cargada
      */
-    public function cargarPlantilla(PlantillaConfig $config):Plantilla|array
+    public function cargarPlantilla(PlantillaConfig $config): Plantilla|array
     {
         $plantilla = $this->getPlantilla($config->path);
 
@@ -203,6 +202,7 @@ class GestorPlantillas
         $plantilla_config->path = $data::PATH;
         // @phpstan-ignore classConstant.nonObject
         $plantilla_config->lang_raiz = $data::LANG_RAIZ;
+
         // @phpstan-ignore method.nonObject
         return $this->cargarPlantilla($plantilla_config)
                     ->render($data, $string);

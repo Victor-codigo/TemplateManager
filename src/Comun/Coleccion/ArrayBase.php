@@ -131,7 +131,7 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      */
     public function isEmpty()
     {
-        return $this->items === [];
+        return [] === $this->items;
     }
 
     /**
@@ -163,8 +163,8 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      *
      * @version 1.0
      *
-     * @param mixed $item elemento que se añade
-     * @param int|string|null $id identificador del elemento
+     * @param mixed           $item elemento que se añade
+     * @param int|string|null $id   identificador del elemento
      */
     public function push(mixed $item, $id = null): void
     {
@@ -195,8 +195,8 @@ abstract class ArrayBase implements \Iterator, \Countable, \JsonSerializable
      * @version 1.0
      *
      * @param object[] $array    desde el que se cargan los datos
-     * @param bool  $set_keys TRUE si se añaden los identificadores de los items
-     *                        FALSE no se añaden
+     * @param bool     $set_keys TRUE si se añaden los identificadores de los items
+     *                           FALSE no se añaden
      */
     public function fillFromArray(array $array, $set_keys = true): void
     {
