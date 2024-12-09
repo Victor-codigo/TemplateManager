@@ -24,9 +24,9 @@ trait PhpunitUtil
      *
      * @param string $class nombre de la clase
      *
-     * @return ReflectionClass<object> clase reflectada
+     * @return ReflectionClass<object>|null clase reflectada
      */
-    protected function getReflectedClass($class) :ReflectionClass
+    protected function getReflectedClass($class) :?ReflectionClass
     {
         $retorno = null;
 
