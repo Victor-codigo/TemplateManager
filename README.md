@@ -2,7 +2,7 @@
 Module that allows to manage templates in php
 
 # Prerequisites
-PHP 7.0
+PHP 8.3
 
 # Stack
 - [PHP 7.0](https://www.php.net/)
